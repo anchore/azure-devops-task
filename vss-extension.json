@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "anchore-build-release-task",
     "name": "Anchore Build and Release Tools",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "FoundItSoftware",
     "targets": [
         {
@@ -18,7 +18,7 @@
     },
     "files": [
         {
-            "path": "buildAndReleaseTask"
+            "path": "anchore-task"
         }
     ],
     "contributions": [
@@ -29,7 +29,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "buildAndReleaseTask"
+                "name": "anchore-task"
             }
         }
     ]

@@ -1,7 +1,7 @@
 {
-  "name": "anchoreclient",
+  "name": "anchore-task",
   "version": "1.0.0",
-  "description": "Anchore Client",
+  "description": "Anchore security scan task",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/anchore/azure-devops-task.git"
   },
-  "author": "Anchore, Inc.",
+  "author": "Anchore",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/anchore/azure-devops-task/issues"
