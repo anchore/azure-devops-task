@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "anchore-build-release-task",
     "name": "Anchore Build and Release Tools",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "publisher": "FoundItSoftware",
     "targets": [
         {
