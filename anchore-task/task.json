@@ -9,8 +9,8 @@
     "author": "Anchore",
     "version": {
         "Major": 0,
-        "Minor": 1,
-        "Patch": 0
+        "Minor": 0,
+        "Patch": 3
     },
     "instanceNameFormat": "Echo $(samplestring)",
     "inputs": [
@@ -25,7 +25,7 @@
     ],
     "execution": {
         "Node10": {
-            "target": "index.js"
+            "target": "dist/index.js"
         }
     }
 }
