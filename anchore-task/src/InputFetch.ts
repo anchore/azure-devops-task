@@ -1,6 +1,8 @@
 
 import tl = require('azure-pipelines-task-lib/task');
 
+
+
 export class InputFetch {
 
     private _url      : string;
@@ -70,8 +72,8 @@ export class InputFetch {
         const ti: string = this.fetch('command', true);
 
         const commands: Array<string> = [
-            'get',
-            'add'
+            'analyze',
+            'scan'
         ];
 
         if (!commands.includes(ti)) {

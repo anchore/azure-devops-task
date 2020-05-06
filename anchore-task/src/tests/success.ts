@@ -8,5 +8,6 @@ let tmr: tmrm.TaskMockRunner = new tmrm.TaskMockRunner(taskPath);
 tmr.setInput('url', 'www.anchore.com');
 tmr.setInput('username', 'James');
 tmr.setInput('password', 'Foobar');
+tmr.setInput('command', 'get');
 
 tmr.run();

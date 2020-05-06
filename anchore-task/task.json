@@ -53,10 +53,10 @@
             "defaultValue": "",
             "required": true,
             "options": {
-                "add": "add",
-                "get": "get"
+                "add": "analyze",
+                "get": "scan"
             },
-            "helpMarkDown": "Container image to operate on <repo/image:tag>."
+            "helpMarkDown": "Command to run on image."
         }
     ],
     "execution": {
