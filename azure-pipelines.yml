@@ -1,0 +1,19 @@
+# Anchore DevOps Task Dev Pipeline
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    tsc
+    npm run build
+  displayName: 'npm install and build'
