@@ -15,14 +15,16 @@ steps:
 - script: |
     npm install
     npm run build
-    pwd
-    ls
   workingDirectory: anchore-task
   displayName: 'npm install and build'
 
 - script: |
-    ls
     npm run start
   workingDirectory: anchore-task
+  env:
+    INPUT_URL: www.anchore.com
+    INPUT_USERNAME: james
+    INPUT_PASSWORD: notsosecret
+    INPUT_COMMAND: get
   displayName: 'Run the project'
 
