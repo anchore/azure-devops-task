@@ -19,7 +19,7 @@
             "type": "string",
             "label": "Anchore Engine URL",
             "defaultValue": "bad",
-            "required": true,
+            "required": false,
             "helpMarkDown": "URL for Anchore Engine instance."
         },
         {
@@ -27,7 +27,7 @@
             "type": "string",
             "label": "Anchore Engine Username",
             "defaultValue": "",
-            "required": true,
+            "required": false,
             "helpMarkDown": "Username for Anchore Engine instance."
         },
         {
@@ -35,7 +35,7 @@
             "type": "string",
             "label": "Anchore Engine Password",
             "defaultValue": "",
-            "required": true,
+            "required": false,
             "helpMarkDown": "Password for Anchore Engine instance."
         },
         {
@@ -43,20 +43,8 @@
             "type": "string",
             "label": "Container image",
             "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Container image to operate on <repo/image:tag>."
-        },
-        {
-            "name": "command",
-            "type": "pickList",
-            "label": "API call that this task will make",
-            "defaultValue": "",
             "required": true,
-            "options": {
-                "analyze": "analyze",
-                "scan": "scan"
-            },
-            "helpMarkDown": "Command to run on image."
+            "helpMarkDown": "Container image to operate on <repo/image:tag>."
         }
     ],
     "execution": {
