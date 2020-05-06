@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as assert from 'assert';
 import * as ttm from 'azure-pipelines-task-lib/mock-test';
 
-describe('Sample task tests', function () {
+describe('Input tests', function () {
 
     before( function() {
 
@@ -25,7 +25,7 @@ describe('Sample task tests', function () {
         assert.equal(tr.warningIssues.length, 0, "should have no warnings");
         assert.equal(tr.errorIssues.length, 0, "should have no errors");
         console.log(tr.stdout);
-        assert.equal(tr.stdout.indexOf('Hello human') >= 0, true, "should display Hello human");
+        assert.equal(tr.stdout.indexOf('URL www.anchore.com') >= 0, true, "should display URL www.anchore.com");
         done();
     });
 
@@ -38,11 +38,12 @@ describe('Sample task tests', function () {
 
         tr.run();
         console.log(tr.succeeded);
+        console.log(tr.stdout);
         assert.equal(tr.succeeded, false, 'should have failed');
         assert.equal(tr.warningIssues, 0, "should have no warnings");
         assert.equal(tr.errorIssues.length, 1, "should have 1 error issue");
-        assert.equal(tr.errorIssues[0], 'Bad input was given', 'error issue output');
-        assert.equal(tr.stdout.indexOf('Hello bad'), -1, "Should not display Hello bad");
+        assert.equal(tr.errorIssues[0], 'Input required: url', 'error issue output');
+        assert.equal(tr.stdout.indexOf('URL'), -1, "Should not display Hello bad");
 
         done();
     });

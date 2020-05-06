@@ -10,17 +10,53 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 4
+        "Patch": 5
     },
-    "instanceNameFormat": "Echo $(samplestring)",
+    "instanceNameFormat": "Anchore Container Scan",
     "inputs": [
         {
-            "name": "samplestring",
+            "name": "url",
             "type": "string",
-            "label": "Sample String",
+            "label": "Anchore Engine URL",
+            "defaultValue": "bad",
+            "required": true,
+            "helpMarkDown": "URL for Anchore Engine instance."
+        },
+        {
+            "name": "username",
+            "type": "string",
+            "label": "Anchore Engine Username",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "A sample string"
+            "helpMarkDown": "Username for Anchore Engine instance."
+        },
+        {
+            "name": "password",
+            "type": "string",
+            "label": "Anchore Engine Password",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Password for Anchore Engine instance."
+        },
+        {
+            "name": "image",
+            "type": "string",
+            "label": "Container image",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Container image to operate on <repo/image:tag>."
+        },
+        {
+            "name": "command",
+            "type": "pickList",
+            "label": "API call that this task will make",
+            "defaultValue": "",
+            "required": true,
+            "options": {
+                "add": "add",
+                "get": "get"
+            },
+            "helpMarkDown": "Container image to operate on <repo/image:tag>."
         }
     ],
     "execution": {
