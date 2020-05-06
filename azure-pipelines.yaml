@@ -16,4 +16,5 @@ steps:
     npm install
     tsc
     npm run build
+  workingDirectory: anchore-task
   displayName: 'npm install and build'
