@@ -14,7 +14,12 @@ steps:
 
 - script: |
     npm install
-    tsc
     npm run build
   workingDirectory: anchore-task
   displayName: 'npm install and build'
+
+- script: |
+    npm run start
+  workingDirectory: anchore-task
+  displayName: 'Run the project'
+
