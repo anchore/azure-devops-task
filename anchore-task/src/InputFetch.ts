@@ -39,11 +39,10 @@ export class InputFetch {
     //
     private error(input: string, required: boolean): string {
         if (required) {
-            throw new Error(input.toUpperCase().concat(' fetch failed.'));
+            tl.setResult(tl.TaskResult.Failed, input.toUpperCase().concat(' fetch failed.'));
             return "(failed)";
         }
         else {
-            tl.setResult(tl.TaskResult.Skipped, input.toUpperCase().concat(' fetch failed.'));
             return "(skipped)";
         }
     }
@@ -77,7 +76,7 @@ export class InputFetch {
         ];
 
         if (!commands.includes(ti)) {
-            throw new Error(ti.toUpperCase().concat(' command is invalid.'));
+            tl.setResult(tl.TaskResult.Failed, ti.toUpperCase().concat(' command is invalid.'));
             return "(invalid)";
         }
 
