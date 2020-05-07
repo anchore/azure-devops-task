@@ -20,6 +20,7 @@
             "label": "Anchore Engine URL",
             "defaultValue": "bad",
             "required": false,
+            "visibleRule": "stateful == true",
             "helpMarkDown": "URL for Anchore Engine instance."
         },
         {
@@ -28,6 +29,7 @@
             "label": "Anchore Engine Username",
             "defaultValue": "",
             "required": false,
+            "visibleRule": "stateful == true",
             "helpMarkDown": "Username for Anchore Engine instance."
         },
         {
@@ -36,6 +38,7 @@
             "label": "Anchore Engine Password",
             "defaultValue": "",
             "required": false,
+            "visibleRule": "stateful == true",
             "helpMarkDown": "Password for Anchore Engine instance."
         },
         {
@@ -45,6 +48,30 @@
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "Container image to operate on <repo/image:tag>."
+        },
+        {
+            "name": "stateful",
+            "type": "boolean",
+            "label": "Send results to Anchore Enterprise",
+            "defaultValue": false,
+            "required": false,
+            "helpMarkDown": "Send the image manifest to a running instance of Anchore Enterprise."
+        },
+        {
+            "name": "dockerfile",
+            "type": "string",
+            "label": "Path to Dockerfile",
+            "defaultValue": false,
+            "required": false,
+            "helpMarkDown": "Path to Dockerfile for scanned image."
+        },
+        {
+            "name": "remoteImage",
+            "type": "boolean",
+            "label": "Scanned image is in a remote repo",
+            "defaultValue": false,
+            "required": false,
+            "helpMarkDown": "Pull down a remote image to be scanned."
         }
     ],
     "execution": {

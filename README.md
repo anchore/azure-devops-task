@@ -101,6 +101,8 @@ required: no
 default:
 required: stateful == true
 group: engine
+
+* Also need a port
 ```
 
 ### username
