@@ -5,26 +5,7 @@ import tl = require('azure-pipelines-task-lib/task');
 
 export class InputFetch {
 
-    private _url        : string;
-    private _username   : string;
-    private _password   : string;
-    private _image      : string;
-    private _stateful   : boolean;
-    private _dockerfile : string;
-    private _remote     : boolean;
-
-    constructor() {
-        this._url      = this.fetchString('url',      false);
-        this._username = this.fetchString('username', false);
-        this._password = this.fetchString('password', false);
-        this._image    = this.fetchString('image',    true);
-
-        this._stateful = tl.getBoolInput('stateful');
-
-        this._dockerfile = this.fetchPath('dockerfile', false, true);
-        this._remote = tl.getBoolInput('remoteImage');
-
-    }
+    constructor() { }
 
 
     //
@@ -32,18 +13,39 @@ export class InputFetch {
     //
     // Return all the inputs
     //
-    get url()        : string  { return 'http://'.concat(this._url.concat(':8228/v1')); }
-    get username()   : string  { return this._username; }
-    get password()   : string  { return this._password; }
-    get image()      : string  { return this._image; }
-    get stateful()   : boolean { return this._stateful; }
-    get dockerfile() : string  { return this._dockerfile; }
-    get remote()     : boolean { return this._remote; }
+    get url(): string  {
+        const url = this.fetchString('url', false);
+        return url.concat(':8228/v1');
+    }
+
+    get username(): string  {
+        return this.fetchString('username', false);
+    }
+
+    get password(): string  {
+        return this.fetchString('password', false);
+    }
+
+    get image(): string  {
+        return this.fetchString('image', true);
+    }
+
+    get stateful(): boolean {
+        return tl.getBoolInput('stateful');
+    }
+
+    get dockerfile(): string  {
+        return this.fetchPath('dockerfile', false, true);
+    }
+
+    get remote(): boolean {
+        return tl.getBoolInput('remoteImage');
+    }
 
 
 
     //
-    // Error function for the 'fetchstring' function
+    // Error function for the 'fetch*' functions
     //
     private error(input: string, required: boolean): string {
         if (required) {

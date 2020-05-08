@@ -4,15 +4,22 @@ import * as ttm from 'azure-pipelines-task-lib/mock-test';
 
 describe('Input tests', function () {
 
-    before( function() {
+    before (function() {
+        process.env['INPUT_URL'] = '';
+        process.env['INPUT_USERNAME'] = '';
+        process.env['INPUT_PASSWORD'] = '';
+        process.env['INPUT_STATEFUL'] = '';
+        process.env['INPUT_DOCKERFILE'] = '';
+        process.env['INPUT_REMOTEIMAGE'] = '';
+        process.env['INPUT_IMAGE'] = '';
 
     });
 
-    after(() => {
+    after (() => {
 
     });
 
-    it('[SUCCEED] With only required inputs', function(done: MochaDone) {
+    it ('[SUCCEED] With only required inputs', function(done: MochaDone) {
         // Add success test here
         this.timeout(2000);
 
@@ -20,14 +27,18 @@ describe('Input tests', function () {
         let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
 
         tr.run();
+        console.log(tr.stdout);
         assert.equal(tr.succeeded, true, 'should have succeeded');
         assert.equal(tr.warningIssues.length, 0, "should have no warnings");
         assert.equal(tr.errorIssues.length, 0, "should have no errors");
         assert.equal(tr.stdout.indexOf('[command]mock/bash /tmp/inline_scan.sh scan testimage:latest') >= 0, true, "Command is correct");
+
+        assert.equal(tr.stdout.indexOf('image=testimage:latest') >= 0, true, "Input for image is correct");
+
         done();
     });
 
-    it('[SUCCEED] With scan inputs', function(done: MochaDone) {
+    it ('[SUCCEED] With scan inputs', function(done: MochaDone) {
         // Add success test here
         this.timeout(2000);
 
@@ -42,7 +53,7 @@ describe('Input tests', function () {
         done();
     });
 
-    it('[FAIL] With no inputs given', function(done: MochaDone) {
+    it ('[FAIL] With no inputs given', function(done: MochaDone) {
         // Add failure test here
         this.timeout(2000);
 
