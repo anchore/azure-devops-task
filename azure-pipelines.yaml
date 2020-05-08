@@ -12,15 +12,32 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run build
-  workingDirectory: anchore-task
-  displayName: 'npm install and build'
+- task: Npm@1
+  inputs:
+    command: install
+    workingDir: anchore-task
 
-- script: |
-    npm install
-    npm run test
-  workingDirectory: anchore-task
-  displayName: 'npm testing'
+- task: Npm@1
+  inputs:
+    command: custom
+    customCommand: run build
+    workingDir: anchore-task
 
+- task: Npm@1
+  inputs:
+    command: custom
+    customCommand: run test
+    workingDir: anchore-task
+
+# - script: |
+#     npm install
+#     npm run build
+#   workingDirectory: anchore-task
+#   displayName: 'npm install and build'
+#
+# - script: |
+#     npm install
+#     npm run test
+#   workingDirectory: anchore-task
+#   displayName: 'npm testing'
+#
