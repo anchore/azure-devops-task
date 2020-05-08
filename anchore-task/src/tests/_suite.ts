@@ -14,7 +14,7 @@ describe('Input tests', function () {
 
     it('[SUCCEED] With only required inputs', function(done: MochaDone) {
         // Add success test here
-        this.timeout(1000);
+        this.timeout(4000);
 
         let tp = path.join(__dirname, 'DefaultCaseSuccess.js');
         let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
@@ -29,7 +29,7 @@ describe('Input tests', function () {
 
     it('[SUCCEED] With scan inputs', function(done: MochaDone) {
         // Add success test here
-        this.timeout(1000);
+        this.timeout(4000);
 
         let tp = path.join(__dirname, 'ScanSuccess.js');
         let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
@@ -44,7 +44,7 @@ describe('Input tests', function () {
 
     it('[FAIL] With no inputs given', function(done: MochaDone) {
         // Add failure test here
-        this.timeout(1000);
+        this.timeout(4000);
 
         let tp = path.join(__dirname, 'NoInputFail.js');
         let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
