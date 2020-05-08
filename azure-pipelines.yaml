@@ -31,7 +31,6 @@ stages:
         displayName: 'npm install and build'
 
       - script: |
-          npm install mocha
           npm run test
         workingDirectory: anchore-task
         displayName: 'npm testing'

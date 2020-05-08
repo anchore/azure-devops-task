@@ -25,6 +25,7 @@
     "@types/mocha": "^7.0.2",
     "@types/node": "^13.13.5",
     "@types/q": "^1.5.2",
+    "mocha": "^7.1.2",
     "sync-request": "^6.1.0"
   }
 }
