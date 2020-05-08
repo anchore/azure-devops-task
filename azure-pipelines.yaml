@@ -1,27 +1,37 @@
 # Anchore DevOps Task Dev Pipeline
-
+---
 trigger:
 - master
 
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+variables:
+  - name: srcDirectory
+    value: '$(System.DefaultWorkingDirectory)/src'
 
 
-- script: |
-    npm install
-    npm run build
-  workingDirectory: anchore-task
-  displayName: 'npm install and build'
+stages:
+- stage: Testing
+  displayName: Build and Test
+  jobs:
+  - job: Testing
+    displayName: Build and Test
+      steps:
 
-- script: |
-    npm install mocha
-    npm run test
-  workingDirectory: anchore-task
-  displayName: 'npm testing'
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '10.x'
+        displayName: 'Install Node.js'
 
+      - script: |
+          npm install
+          npm run build
+        workingDirectory: anchore-task
+        displayName: 'npm install and build'
+
+      - script: |
+          npm install mocha
+          npm run test
+        workingDirectory: anchore-task
+        displayName: 'npm testing'

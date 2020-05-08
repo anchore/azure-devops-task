@@ -20,45 +20,45 @@ async function run() {
         ]);
         var code: number = await curltool.exec();
 
-        var scanstr: ScanString = new ScanString(scanner);
+        var scan: ScanString = new ScanString(scanner);
 
         // Build the string based off inputs
         if (fetch.stateful) {
-            scanstr.add(['analyze']);
-            scanstr.add(['-r', fetch.url]);
-            scanstr.add(['-u', fetch.username]);
-            scanstr.add(['-p', fetch.password]);
-            // scanstr.add(['-a', fetch.annotations]);
-            // scanstr.add(['-d', fetch.digest]);
-            scanstr.add(['-f', fetch.dockerfile]);
-            // scanstr.add(['-i', fetch.imageID]);
-            // scanstr.add(['-m', fetch.manifest]);
-            // scanstr.add(['-t', fetch.timeout]);
-            scanstr.add(['-g']); // Generate the manifest
+            scan.add(['analyze']);
+            scan.add(['-r', fetch.url]);
+            scan.add(['-u', fetch.username]);
+            scan.add(['-p', fetch.password]);
+            // scan.add(['-a', fetch.annotations]);
+            // scan.add(['-d', fetch.digest]);
+            scan.add(['-f', fetch.dockerfile]);
+            // scan.add(['-i', fetch.imageID]);
+            // scan.add(['-m', fetch.manifest]);
+            // scan.add(['-t', fetch.timeout]);
+            scan.add(['-g']); // Generate the manifest
             if (fetch.remote) {
-                scanstr.add(['-P']);
+                scan.add(['-P']);
             }
-            // scanstr.add(['-V']);
+            // scan.add(['-V']);
         }
         else {
-            scanstr.add(['scan']);
-            // scanstr.add(['-b', fetch.policybundle]);
-            scanstr.add(['-d', fetch.dockerfile]);
-            // scanstr.add(['-v', fetch.archives]);
-            // scanstr.add(['-t', fetch.timeout]);
-            // scanstr.add(['-f']);
+            scan.add(['scan']);
+            // scan.add(['-b', fetch.policybundle]);
+            scan.add(['-d', fetch.dockerfile]);
+            // scan.add(['-v', fetch.archives]);
+            // scan.add(['-t', fetch.timeout]);
+            // scan.add(['-f']);
             if (fetch.remote) {
-                scanstr.add(['-p']);
+                scan.add(['-p']);
             }
-            // scanstr.add(['-r']);
-            // scanstr.add(['-V']);
+            // scan.add(['-r']);
+            // scan.add(['-V']);
         }
 
-        scanstr.add([fetch.image]);
-        console.log('SCANNING: ', scanstr.args);
+        scan.add([fetch.image]);
+        console.log('SCANNING: ', scan.args);
 
         var bash = tl.which('bash');
-        var inlinescan: tr.ToolRunner = tl.tool(bash).line(scanstr.args);
+        var inlinescan: tr.ToolRunner = tl.tool(bash).line(scan.args);
         code = await inlinescan.exec();
     }
     catch (err) {
