@@ -18,4 +18,8 @@ steps:
   workingDirectory: anchore-task
   displayName: 'npm install and build'
 
+- script: |
+    npm run test
+  workingDirectory: anchore-task
+  displayName: 'npm testing'
 
