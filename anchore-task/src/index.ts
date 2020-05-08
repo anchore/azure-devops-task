@@ -46,18 +46,13 @@ async function run() {
             scanstr.add(['-d', fetch.dockerfile]);
             // scanstr.add(['-v', fetch.archives]);
             // scanstr.add(['-t', fetch.timeout]);
-            scanstr.add(['-f']);
+            // scanstr.add(['-f']);
             if (fetch.remote) {
                 scanstr.add(['-p']);
             }
             // scanstr.add(['-r']);
             // scanstr.add(['-V']);
         }
-
-        if (fetch.dockerfile != "") {
-            console.log(fetch.dockerfile);
-        }
-
 
         scanstr.add([fetch.image]);
         console.log('SCANNING: ', scanstr.args);
