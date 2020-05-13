@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "anchore-build-release-task",
     "name": "Anchore Build and Release Tools",
-    "version": "0.0.12",
+    "version": "0.0.18",
     "publisher": "FoundItSoftware",
     "targets": [
         {
@@ -19,17 +19,30 @@
     "files": [
         {
             "path": "anchore-task"
+        },
+        {
+            "path": "anchore-enterprise-task"
         }
     ],
     "contributions": [
         {
-            "id": "custom-build-release-task",
+            "id": "engine-custom-build-release-task",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
                 "name": "anchore-task"
+            }
+        },
+        {
+            "id": "enterprise-custom-build-release-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "anchore-enterprise-task"
             }
         }
     ]

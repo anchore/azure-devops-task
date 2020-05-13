@@ -10,15 +10,31 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 12
+        "Patch": 18
     },
     "instanceNameFormat": "Anchore Container Scan",
     "inputs": [
         {
+            "name": "image",
+            "type": "string",
+            "label": "Container image",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Container image to operate on <repo/image:tag>."
+        },
+        {
+            "name": "stateful",
+            "type": "boolean",
+            "label": "Send results to Anchore Enterprise",
+            "defaultValue": false,
+            "required": false,
+            "helpMarkDown": "Send the image manifest to a running instance of Anchore Enterprise."
+        },
+        {
             "name": "url",
             "type": "string",
             "label": "Anchore Engine URL",
-            "defaultValue": "bad",
+            "defaultValue": "",
             "required": false,
             "visibleRule": "stateful == true",
             "helpMarkDown": "URL for Anchore Engine instance."
@@ -42,26 +58,10 @@
             "helpMarkDown": "Password for Anchore Engine instance."
         },
         {
-            "name": "image",
-            "type": "string",
-            "label": "Container image",
-            "defaultValue": "",
-            "required": true,
-            "helpMarkDown": "Container image to operate on <repo/image:tag>."
-        },
-        {
-            "name": "stateful",
-            "type": "boolean",
-            "label": "Send results to Anchore Enterprise",
-            "defaultValue": false,
-            "required": false,
-            "helpMarkDown": "Send the image manifest to a running instance of Anchore Enterprise."
-        },
-        {
             "name": "dockerfile",
             "type": "string",
             "label": "Path to Dockerfile",
-            "defaultValue": false,
+            "defaultValue": "",
             "required": false,
             "helpMarkDown": "Path to Dockerfile for scanned image."
         },

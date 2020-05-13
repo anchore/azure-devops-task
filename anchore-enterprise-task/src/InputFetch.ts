@@ -13,7 +13,6 @@ export class InputFetch {
     //
     // Return all the inputs
     //
-    // TODO: Get the port as well?
     get url(): string  {
         return this.fetchString('url', false);
     }
@@ -28,18 +27,6 @@ export class InputFetch {
 
     get image(): string  {
         return this.fetchString('image', true);
-    }
-
-    get stateful(): boolean {
-        return tl.getBoolInput('stateful');
-    }
-
-    get dockerfile(): string  {
-        return this.fetchPath('dockerfile', false, true);
-    }
-
-    get remote(): boolean {
-        return tl.getBoolInput('remoteImage');
     }
 
 

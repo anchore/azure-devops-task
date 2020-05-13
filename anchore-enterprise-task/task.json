@@ -1,0 +1,55 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "796e630f-05c9-4a59-baab-d5157f0c740a",
+    "name": "AnchoreEnterprise",
+    "friendlyName": "Anchore Enterprise Security Scan",
+    "description": "Anchore Enterprise container security scan client",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Anchore",
+    "version": {
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 18
+    },
+    "instanceNameFormat": "Anchore Enterprise Container Scan",
+    "inputs": [
+        {
+            "name": "image",
+            "type": "string",
+            "label": "Container image",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Container image to operate on <repo/image:tag>."
+        },
+        {
+            "name": "url",
+            "type": "string",
+            "label": "Anchore Enterprise URL",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "URL for Anchore Engine instance."
+        },
+        {
+            "name": "username",
+            "type": "string",
+            "label": "Anchore Enterprise Username",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Username for Anchore Engine instance."
+        },
+        {
+            "name": "password",
+            "type": "string",
+            "label": "Anchore Enterprise Password",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Password for Anchore Enterprise instance."
+        }
+    ],
+    "execution": {
+        "Node10": {
+            "target": "dist/index.js"
+        }
+    }
+}

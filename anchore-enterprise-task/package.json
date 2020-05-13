@@ -1,0 +1,28 @@
+{
+  "name": "anchore-enterprise-task",
+  "version": "1.0.0",
+  "description": "Enterprise interface for Anchore",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha dist/tests/_suite.js",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/found-it/azure-devops-task.git"
+  },
+  "author": "James Petersen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/found-it/azure-devops-task/issues"
+  },
+  "homepage": "https://github.com/found-it/azure-devops-task#readme",
+  "dependencies": {
+    "azure-pipelines-task-lib": "^2.9.5"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.1",
+    "@types/q": "^1.5.2"
+  }
+}
