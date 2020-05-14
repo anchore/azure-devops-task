@@ -10,7 +10,7 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 18
+        "Patch": 25
     },
     "instanceNameFormat": "Anchore Enterprise Container Scan",
     "inputs": [
@@ -53,3 +53,5 @@
         }
     }
 }
+
+
