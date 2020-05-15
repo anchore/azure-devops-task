@@ -10,7 +10,7 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 25
+        "Patch": 28
     },
     "instanceNameFormat": "Anchore Enterprise Container Scan",
     "inputs": [
@@ -45,6 +45,14 @@
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "Password for Anchore Enterprise instance."
+        },
+        {
+            "name": "dockerfile",
+            "type": "string",
+            "label": "Path to Dockerfile",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Path to Dockerfile for scanned image."
         }
     ],
     "execution": {

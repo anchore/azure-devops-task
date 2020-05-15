@@ -29,6 +29,9 @@ export class InputFetch {
         return this.fetchString('image', true);
     }
 
+    get dockerfile(): string  {
+        return this.fetchPath('dockerfile', false, true);
+    }
 
 
     //

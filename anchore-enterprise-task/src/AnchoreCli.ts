@@ -10,6 +10,7 @@ export class AnchoreCli {
     private _args: string[];
     private _path: string;
     private _image: string;
+    private _dockerfile: string;
 
     constructor() {
         const fetch: InputFetch = new InputFetch();
@@ -20,6 +21,7 @@ export class AnchoreCli {
 
         this._path = tl.which('anchore-cli', true);
         this._image = fetch.image;
+        this._dockerfile = fetch.dockerfile;
     }
 
     run(arg: string[]): any {
@@ -32,6 +34,7 @@ export class AnchoreCli {
     }
 
     image(cmd: string[]): any {
+
 
         var out: tr.IExecSyncResult = this.run(
             new Array('image').concat(cmd)
@@ -55,8 +58,16 @@ export class AnchoreCli {
     }
 
     scanImage() {
+        console.log("DOCKERFILE:", this._dockerfile);
 
-        console.log(this.image(['add', this._image]));
+        var addCmd: string[] = ['add', this._image];
+        if (this._dockerfile) {
+            addCmd = addCmd.concat(['--dockerfile', this._dockerfile]);
+        }
+
+        console.log(addCmd);
+
+        console.log(this.image(addCmd));
         console.log(this.image(['wait', this._image]));
         const out: tr.IExecSyncResult = this.run(['evaluate', 'check', this._image]);
 
@@ -67,14 +78,17 @@ export class AnchoreCli {
 
             const ecr = this.getScanResults(json);
 
-            console.log(Object.keys(json[0])[0]);
-
+            console.log("-----------------------------");
+            console.log("");
             console.log("Last Evaluation: ", ecr.results.last_evaluation);
             console.log("Policy ID:       ", ecr.results.policyId);
             console.log("Status:          ", ecr.results.status);
             console.log("");
             console.log("To see the full report please visit:");
             console.log("    ", ecr.url);
+            console.log("");
+            console.log("-----------------------------");
+            console.log("");
         }
         catch {}
 
