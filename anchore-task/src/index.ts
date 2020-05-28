@@ -5,25 +5,31 @@ import { InputFetch } from './InputFetch';
 import { ScanString } from './ScanString';
 
 
+// Main run function for task
 async function run() {
     try {
         const fetch: InputFetch = new InputFetch();
 
-
+        // Location of inline_scan script
         const scanner: string = `/tmp/inline_scan.sh`;
 
-        var docker = tl.which('docker', true);
+        // Ensure docker is available
+        tl.which('docker', true);
+
         var curl = tl.which('curl', true);
         var curltool: tr.ToolRunner = tl.tool(curl).arg([
-            '-s', 'https://ci-tools.anchore.io/inline_scan-latest',
-            '-o', scanner
+            '--silent',
+            '--fail',
+            '--show-error',
+            '--output', scanner,
+            'https://ci-tools.anchore.io/inline_scan-latest'
         ]);
-        var code: number = await curltool.exec();
+        await curltool.exec();
 
         var scan: ScanString = new ScanString(scanner);
 
-        // Build the string based off inputs
-        if (fetch.stateful) {
+        // Build the command string based off inputs
+        if (fetch.stateful) { // Analyze command
             scan.add(['analyze']);
             scan.add(['-r', fetch.url]);
             scan.add(['-u', fetch.username]);
@@ -40,7 +46,7 @@ async function run() {
             }
             // scan.add(['-V']);
         }
-        else {
+        else { // Scan command
             scan.add(['scan']);
             // scan.add(['-b', fetch.policybundle]);
             scan.add(['-d', fetch.dockerfile]);
@@ -55,16 +61,16 @@ async function run() {
         }
 
         scan.add([fetch.image]);
-        console.log('SCANNING: ', scan.args);
+        console.log('Scanning: ', scan.args);
 
         var bash = tl.which('bash');
         var inlinescan: tr.ToolRunner = tl.tool(bash).line(scan.args);
-        code = await inlinescan.exec();
+        var code = await inlinescan.exec();
     }
     catch (err) {
         tl.setResult(tl.TaskResult.Failed, err.message);
     }
 }
 
+// Run the task
 run();
-

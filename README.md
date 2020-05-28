@@ -1,127 +1,24 @@
-# Anchore Azure DevOps Task Plugin
+# Anchore Azure DevOps Task Plugins
 
-Anchore Task Extension for Azure DevOps Pipelines
+Anchore Task Extensions for Azure DevOps Pipelines
 
-## Task usage
+---
 
-**Default behavior is a stateless local scan**
-
-#### Scanning a remote image - stateless
-```
-Anchore@0
-  image: jpetersenames/ipserver:latest
-  dockerfile: ./Dockerfile
-  timeout: 300
-  verbose: true
-  remote: true
-  policybundle: ./policy.json
-  stateful: false
-```
-
-#### Scanning a remote image - stateful
-```
-Anchore@0
-  image: jpetersenames/ipserver:latest
-  dockerfile: ./Dockerfile
-  timeout: 300
-  verbose: true
-  remote: true
-  stateful: true
-  url: www.anchore-engine.com:8228/v1
-  username: james
-  password: foo
-```
-
-#### Scanning a local image - stateless
-```
-Anchore@0
-  image: ipserver:latest
-  dockerfile: ./Dockerfile
-  timeout: 300
-  verbose: true
-  remote: false
-  policybundle: ./policy.json
-  stateful: false
-```
-
-#### Scanning a local image - stateful
-```
-Anchore@0
-  image: jpetersenames/ipserver:latest
-  dockerfile: ./Dockerfile
-  timeout: 300
-  verbose: true
-  remote: false
-  stateful: true
-  url: www.anchore-engine.com:8228/v1
-  username: james
-  password: foo
-```
+Azure DevOps build and release tasks to run Anchore and scan container images.
+The `anchore-task` uses the inline scan tool offered by Anchore while the
+`anchore-enterprise-task` uses the `anchore-cli` tool to perform a CVE scan
+and policy evaluation.
 
 
+## Building Locally
 
-### image
+To build either extension locally just `cd` into the appropriate directory and run
 ```
-default:
-required: yes
-```
-
-### dockerfile
-```
-default:
-required: no
+npm install
+npm run build
 ```
 
-### timeout
+To run the extension locally use
 ```
-default: 300
-required: no
+npm run app
 ```
-
-### verbose
-```
-default: false
-required: no
-```
-
-### remote
-```
-default: false
-required: no
-```
-
-### stateful
-```
-default: false
-required: no
-```
-
-### url
-```
-default:
-required: stateful == true
-group: engine
-
-* Also need a port
-```
-
-### username
-```
-default:
-required: stateful == true
-group: engine
-```
-
-### password
-```
-default:
-required: stateful == true
-group: engine
-```
-
-### policybundle
-```
-default:
-required: no
-```
-

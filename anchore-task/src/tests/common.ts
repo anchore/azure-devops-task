@@ -1,4 +1,7 @@
-
+//
+// Common answer structure for all the tests. It will ensure the basic running
+// of the program during the test environment.
+//
 export let answers: any = {
     "checkPath": {
         ['mock/docker']: true,
@@ -15,7 +18,7 @@ export let answers: any = {
         "bash": "mock/bash"
     },
     "exec": {
-        "mock/curl -s https://ci-tools.anchore.io/inline_scan-latest -o /tmp/inline_scan.sh": {
+        "mock/curl --silent --fail --show-error --output /tmp/inline_scan.sh https://ci-tools.anchore.io/inline_scan-latest": {
             "code": 0,
             "stdout": "Download the inline scan script",
             "stderr": ""

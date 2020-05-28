@@ -3,23 +3,24 @@ export class ScanString {
 
     private _args: string;
 
-    constructor(cmdpath: string) {
+    // Constructor should take the path to the command to run
+    // In this case it will take the path to inline_scan.sh
+    constructor (cmdpath: string) {
         this._args = cmdpath;
     }
 
-    get args() : string {
+    get args () : string {
         return this._args;
     }
 
-    add(args: string[]) {
+    // Concatenate a list of commands to the private _args
+    add (args: string[]) {
 
         var tmp: string = '';
 
         args.forEach(s => {
 
-            console.log('Adding: ', s);
             if (s == '') {
-                // throw new Error("Scanner argument is empty.");
                 tmp = '';
                 return;
             }
@@ -29,5 +30,3 @@ export class ScanString {
         this._args = this._args.concat(tmp);
     }
 }
-
-

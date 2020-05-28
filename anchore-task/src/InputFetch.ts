@@ -1,19 +1,15 @@
-
 import tl = require('azure-pipelines-task-lib/task');
-
 
 
 export class InputFetch {
 
     constructor() { }
 
-
     //
     // Getters
     //
-    // Return all the inputs
+    // Return each corresponding input.
     //
-    // TODO: Get the port as well?
     get url(): string  {
         return this.fetchString('url', false);
     }
@@ -42,10 +38,8 @@ export class InputFetch {
         return tl.getBoolInput('remoteImage');
     }
 
-
-
     //
-    // Error function for the 'fetch*' functions
+    // Error function for the 'fetch*' functions.
     //
     private error(input: string, required: boolean): string {
         if (required) {
@@ -56,7 +50,7 @@ export class InputFetch {
 
 
     //
-    // Fetch the inputs from the task
+    // Fetch a path input from the task.
     //
     private fetchPath(input: string, required: boolean, check: boolean): string {
 
@@ -65,12 +59,11 @@ export class InputFetch {
         if (ti === undefined || ti.length == 0) {
             return this.error(input, required);
         }
-
         return ti;
     }
 
     //
-    // Fetch the inputs from the task
+    // Fetch a string input from the task.
     //
     private fetchString(input: string, required: boolean): string {
 
@@ -79,7 +72,6 @@ export class InputFetch {
         if (ti === undefined || ti.length == 0) {
             return this.error(input, required);
         }
-
         return ti;
     }
 
