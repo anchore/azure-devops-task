@@ -1,12 +1,9 @@
-
 import tl = require('azure-pipelines-task-lib/task');
-
 
 
 export class InputFetch {
 
     constructor() { }
-
 
     //
     // Getters
@@ -35,9 +32,9 @@ export class InputFetch {
 
 
     //
-    // Error function for the 'fetch*' functions
+    // Error function for the 'fetch*' functions.
     //
-    private error(input: string, required: boolean): string {
+    private error (input: string, required: boolean): string {
         if (required) {
             tl.setResult(tl.TaskResult.Failed, input.toUpperCase().concat(' fetch failed.'));
         }
@@ -46,23 +43,22 @@ export class InputFetch {
 
 
     //
-    // Fetch the inputs from the task
+    // Fetch a path input from the task.
     //
-    private fetchPath(input: string, required: boolean, check: boolean): string {
+    private fetchPath (input: string, required: boolean, check: boolean): string {
 
         const ti: string | undefined = tl.getPathInput(input, required, check);
 
         if (ti === undefined || ti.length == 0) {
             return this.error(input, required);
         }
-
         return ti;
     }
 
     //
-    // Fetch the inputs from the task
+    // Fetch a string input from the task.
     //
-    private fetchString(input: string, required: boolean): string {
+    private fetchString (input: string, required: boolean): string {
 
         const ti: string | undefined = tl.getInput(input, required);
 

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha dist/tests/_suite.js",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "app": "node dist/index.js"
   },
   "repository": {
     "type": "git",

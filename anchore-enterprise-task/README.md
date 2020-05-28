@@ -8,7 +8,7 @@ This pipelines extension is built off of the `anchore-cli` tool used to communic
 
 ## Task usage
 
-#### Scanning an image
+### Scanning an image
 ```
 AnchoreEnterprise@0
   image: stagingrepo/imagename:tag
@@ -18,6 +18,7 @@ AnchoreEnterprise@0
   password: fakepass
 ```
 
+## Variable descriptions
 
 ### image
 ```
@@ -48,3 +49,7 @@ required: yes
 default:
 required: yes
 ```
+
+## Notes
+
+TODO: Add in testing suite

@@ -1,9 +1,9 @@
-
 import tl = require('azure-pipelines-task-lib/task');
 import tr = require('azure-pipelines-task-lib/toolrunner');
 
 import { InputFetch } from './InputFetch';
 import { EvaluateCheckResults, EvaluateCheckReport } from './EvaluateCheckOutput';
+
 
 export class AnchoreCli {
 
@@ -11,6 +11,7 @@ export class AnchoreCli {
     private _path: string;
     private _image: string;
     private _dockerfile: string;
+
 
     constructor() {
         const fetch: InputFetch = new InputFetch();
@@ -24,17 +25,32 @@ export class AnchoreCli {
         this._dockerfile = fetch.dockerfile;
     }
 
-    run(arg: string[]): any {
+
+    //
+    //  Run any command with anchore-cli. This already has the username,
+    //  password, and url baked into it so usage is simple. Returns an
+    //  IExecSyncResult structure.
+    //
+    //  Usage:
+    //      run(['image', 'add', 'image:tag'])
+    //
+    run (arg: string[]): any {
+
         const args = this._args
                          .concat(arg);
 
         console.log(this._path, args.join(' '));
 
         return tl.execSync(this._path, args, {"silent": false});
+
     }
 
-    image(cmd: string[]): any {
 
+    //
+    //  Utilizes the run() command but is specific for `image`. It will
+    //  attempt to return json output but will default to IExecSyncResult
+    //
+    image (cmd: string[]): any {
 
         var out: tr.IExecSyncResult = this.run(
             new Array('image').concat(cmd)
@@ -57,20 +73,24 @@ export class AnchoreCli {
 
     }
 
-    scanImage() {
-        console.log("DOCKERFILE:", this._dockerfile);
+
+    //
+    //  Scans the image handed to it by the Task Inputs. It uses the image()
+    //  and run() functions to add an image, wait for the image, then runs an
+    //  `evaluate check` and grabs the results. The results are parsed into a
+    //  structure so they can be used to report info back in the Azure DevOps
+    //  UI.
+    //
+    scanImage () {
 
         var addCmd: string[] = ['add', this._image];
         if (this._dockerfile) {
             addCmd = addCmd.concat(['--dockerfile', this._dockerfile]);
         }
-
-        console.log(addCmd);
-
         console.log(this.image(addCmd));
         console.log(this.image(['wait', this._image]));
-        const out: tr.IExecSyncResult = this.run(['evaluate', 'check', this._image]);
 
+        const out: tr.IExecSyncResult = this.run(['evaluate', 'check', this._image]);
         console.log(out.stdout);
 
         try {
@@ -92,14 +112,20 @@ export class AnchoreCli {
         }
         catch {}
 
-        if (out.code != 0) {// || ecr.results.status == "fail") {
+        if (out.code != 0) {
             // Image fails policy check, generate report and fail pipeline
             throw new Error("Image did not pass inspection");
         }
+
     }
 
+
     //
-    //  Traverse into the json and return the results
+    //  Traverse into the json and return the results.
+    //
+    //  TODO: This could be implemented better. Perhaps recursively. However
+    //        I was not able to read the json directly into an interface
+    //        and there may be a better way to do this.
     //
     private getScanResults(json: any): EvaluateCheckReport {
 
@@ -109,7 +135,6 @@ export class AnchoreCli {
         var image: string = "";
         var sha: string = "";
         while ( keys.length > 0 ) {
-
 
             keys.forEach( k => {
                 if (k.indexOf('sha256:') >= 0) {
@@ -153,9 +178,7 @@ export class AnchoreCli {
             image   : image,
             url     : urlArray.join('/')
         }
-
-
         return ecr;
     }
-}
 
+}

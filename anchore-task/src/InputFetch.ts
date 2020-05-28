@@ -41,7 +41,7 @@ export class InputFetch {
     //
     // Error function for the 'fetch*' functions.
     //
-    private error(input: string, required: boolean): string {
+    private error (input: string, required: boolean): string {
         if (required) {
             tl.setResult(tl.TaskResult.Failed, input.toUpperCase().concat(' fetch failed.'));
         }
@@ -52,7 +52,7 @@ export class InputFetch {
     //
     // Fetch a path input from the task.
     //
-    private fetchPath(input: string, required: boolean, check: boolean): string {
+    private fetchPath (input: string, required: boolean, check: boolean): string {
 
         const ti: string | undefined = tl.getPathInput(input, required, check);
 
@@ -65,7 +65,7 @@ export class InputFetch {
     //
     // Fetch a string input from the task.
     //
-    private fetchString(input: string, required: boolean): string {
+    private fetchString (input: string, required: boolean): string {
 
         const ti: string | undefined = tl.getInput(input, required);
 

@@ -22,3 +22,30 @@ To run the extension locally use
 ```
 npm run app
 ```
+
+## Building the extensions
+
+Please refer to [Microsoft documentation][1] for creating build and release
+tasks.
+
+Everything should be set up for building and publishing the tasks. To do so you
+must increment the versions in
+
+```
+anchore-task/task.json
+anchore-enterprise-task/task.json
+```
+
+So that they match the next version of extension. Then when you are ready to
+build the extension to publish it, use the following command in the root of
+the project (where `vss-extension.json` is located).
+
+```
+tfx extension create --manifest-globs vss-extension.json --rev-version
+```
+
+This will create a `.vsix` file which can be published to the Marketplace.
+
+
+
+[1]: https://docs.microsoft.com/en-us/azure/devops/extend/develop/add-build-task?view=azure-devops
