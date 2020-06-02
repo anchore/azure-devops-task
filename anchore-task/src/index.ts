@@ -30,6 +30,7 @@ async function run() {
 
         // Build the command string based off inputs
         if (fetch.stateful) { // Analyze command
+
             scan.add(['analyze']);
             scan.add(['-r', fetch.url]);
             scan.add(['-u', fetch.username]);
@@ -44,20 +45,38 @@ async function run() {
             if (fetch.remote) {
                 scan.add(['-P']);
             }
-            // scan.add(['-V']);
+
+            // Verbose
+            // if (fetch.verbose) {
+            //     scan.add(['-V']);
+            // }
+
         }
         else { // Scan command
+
             scan.add(['scan']);
             // scan.add(['-b', fetch.policybundle]);
             scan.add(['-d', fetch.dockerfile]);
             // scan.add(['-v', fetch.archives]);
             // scan.add(['-t', fetch.timeout]);
-            // scan.add(['-f']);
+
+            // Exit on fail
+            // if (fetch.exitOnFail) {
+            //     scan.add(['-f']);
+            // }
+
             if (fetch.remote) {
                 scan.add(['-p']);
             }
+
+            // Generate report
             // scan.add(['-r']);
-            // scan.add(['-V']);
+
+            // Verbose
+            // if (fetch.verbose) {
+            //     scan.add(['-V']);
+            // }
+
         }
 
         scan.add([fetch.image]);

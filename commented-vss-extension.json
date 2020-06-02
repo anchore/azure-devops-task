@@ -4,6 +4,9 @@
     "name": "Anchore Build and Release Tools",
     "version": "0.0.29",
     "publisher": "FoundItSoftware",
+//    "galleryFlags": [
+//        "Public"
+//    ],
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
@@ -24,6 +27,9 @@
         "details": {
             "path": "README.md"
         }
+//        "license": {
+//            "path": "eula.md"
+//        }
     },
     "repository": {
         "type": "git",
