@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "anchore-build-release-task",
     "name": "Anchore Build and Release Tools",
-    "version": "0.0.30",
+    "version": "0.0.37",
     "publisher": "FoundItSoftware",
     "targets": [
         {
@@ -22,7 +22,7 @@
         "default": "images/anchore.png"
     },
     "branding": {
-        "color": "rgb(0, 0, 0)",
+        "color": "rgb(34, 34, 34)",
         "theme": "light"
     },
     "content": {

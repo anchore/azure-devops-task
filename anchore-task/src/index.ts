@@ -2,7 +2,7 @@ import tl = require('azure-pipelines-task-lib/task');
 import tr = require('azure-pipelines-task-lib/toolrunner');
 
 import { InputFetch } from './InputFetch';
-import { ScanString } from './ScanString';
+import { ScanArgs } from './ScanArgs';
 
 
 // Main run function for task
@@ -26,7 +26,7 @@ async function run() {
         ]);
         await curltool.exec();
 
-        var scan: ScanString = new ScanString(scanner);
+        var scan: ScanArgs = new ScanArgs(scanner);
 
         // Build the command string based off inputs
         if (fetch.stateful) { // Analyze command
@@ -35,13 +35,20 @@ async function run() {
             scan.add(['-r', fetch.url]);
             scan.add(['-u', fetch.username]);
             scan.add(['-p', fetch.password]);
+
             // scan.add(['-a', fetch.annotations]);
             // scan.add(['-d', fetch.digest]);
-            scan.add(['-f', fetch.dockerfile]);
+
+            if (fetch.dockerfile) {
+                scan.add(['-f', fetch.dockerfile]);
+            }
+
             // scan.add(['-i', fetch.imageID]);
             // scan.add(['-m', fetch.manifest]);
             // scan.add(['-t', fetch.timeout]);
+
             scan.add(['-g']); // Generate the manifest
+
             if (fetch.remote) {
                 scan.add(['-P']);
             }
@@ -55,15 +62,18 @@ async function run() {
         else { // Scan command
 
             scan.add(['scan']);
-            // scan.add(['-b', fetch.policybundle]);
-            scan.add(['-d', fetch.dockerfile]);
+            if (fetch.policy) {
+                scan.add(['-b', fetch.policy]);
+            }
+
+            if (fetch.dockerfile) {
+                scan.add(['-d', fetch.dockerfile]);
+            }
             // scan.add(['-v', fetch.archives]);
             // scan.add(['-t', fetch.timeout]);
 
             // Exit on fail
-            // if (fetch.exitOnFail) {
-            //     scan.add(['-f']);
-            // }
+            scan.add(['-f']);
 
             if (fetch.remote) {
                 scan.add(['-p']);

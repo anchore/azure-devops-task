@@ -38,6 +38,10 @@ export class InputFetch {
         return tl.getBoolInput('remoteImage');
     }
 
+    get policy(): string  {
+        return this.fetchPath('policyBundle', false, true);
+    }
+
     //
     // Error function for the 'fetch*' functions.
     //

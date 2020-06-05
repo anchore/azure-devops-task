@@ -10,7 +10,7 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 30
+        "Patch": 37
     },
     "instanceNameFormat": "Anchore Container Scan",
     "inputs": [
@@ -72,6 +72,15 @@
             "defaultValue": false,
             "required": false,
             "helpMarkDown": "Pull down a remote image to be scanned."
+        },
+        {
+            "name": "policyBundle",
+            "type": "string",
+            "label": "Path to local policy bundle",
+            "defaultValue": "",
+            "required": false,
+            "visibleRule": "stateful == false",
+            "helpMarkDown": "Path to a local policy bundle."
         }
     ],
     "execution": {

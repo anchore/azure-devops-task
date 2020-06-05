@@ -1,5 +1,5 @@
 
-export class ScanString {
+export class ScanArgs {
 
     private _args: string;
 
