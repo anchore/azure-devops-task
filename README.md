@@ -33,7 +33,6 @@ must increment the versions in
 
 ```
 anchore-task/task.json
-anchore-enterprise-task/task.json
 ```
 
 So that they match the next version of extension. Then when you are ready to

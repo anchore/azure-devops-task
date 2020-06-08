@@ -33,14 +33,3 @@ stages:
         npm run test
       workingDirectory: anchore-task
       displayName: 'Anchore@0: Test'
-
-    - script: |
-        npm install
-        npm run build
-      workingDirectory: anchore-enterprise-task
-      displayName: 'AnchoreEnterprise@0: Install and Build'
-
-    - script: |
-        npm run test
-      workingDirectory: anchore-enterprise-task
-      displayName: 'AnchoreEnterprise@0: Test'

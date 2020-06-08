@@ -62,16 +62,3 @@ Anchore@0
     dockerfile: 'Dockerfile'
     remoteImage: true
 ```
-
-
-### Anchore Enterprise Task
-
-```
-AnchoreEnterprise@0
-  image: stagingrepo/imagename:tag
-  dockerfile: Dockerfile
-  url: myanchore.com:8228/v1
-  username: fakeuser
-  password: fakepass
-```
-

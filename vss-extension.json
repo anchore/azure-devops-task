@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "anchore-build-release-task",
     "name": "Anchore Build and Release Tools",
-    "version": "0.0.37",
+    "version": "0.0.39",
     "publisher": "FoundItSoftware",
     "targets": [
         {
@@ -23,7 +23,7 @@
     },
     "branding": {
         "color": "rgb(34, 34, 34)",
-        "theme": "light"
+        "theme": "dark"
     },
     "content": {
         "details": {
@@ -44,10 +44,10 @@
             "uri": "https://www.anchore.com/support"
         },
         "repository": {
-            "uri": "https://github.com/anchore/anchore-engine"
+            "uri": "https://github.com/found-it/azure-devops-task"
         },
         "issues": {
-            "uri": "https://github.com/anchore/anchore-engine/issues"
+            "uri": "https://github.com/found-it/azure-devops-task/issues"
         }
     },
     "repository": {
@@ -57,9 +57,6 @@
     "files": [
         {
             "path": "anchore-task"
-        },
-        {
-            "path": "anchore-enterprise-task"
         },
         {
             "path": "images/anchore.png",
@@ -75,22 +72,6 @@
             ],
             "properties": {
                 "name": "anchore-task",
-                "iconAsset": "FoundItSoftware.anchore-build-release-task/images/anchore.png",
-                "includesData": {
-                    "assets": [
-                        "FoundItSoftware.anchore-build-release-task/images/anchore.png"
-                    ]
-                }
-            }
-        },
-        {
-            "id": "enterprise-custom-build-release-task",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [
-                "ms.vss-distributed-task.tasks"
-            ],
-            "properties": {
-                "name": "anchore-enterprise-task",
                 "iconAsset": "FoundItSoftware.anchore-build-release-task/images/anchore.png",
                 "includesData": {
                     "assets": [
