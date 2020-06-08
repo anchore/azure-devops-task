@@ -30,6 +30,10 @@ export class InputFetch {
         return tl.getBoolInput('failBuild');
     }
 
+    get debug(): boolean {
+        return tl.getBoolInput('debug');
+    }
+
     //
     // Error function for the 'fetch*' functions.
     //

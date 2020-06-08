@@ -50,12 +50,12 @@ async function run() {
         }
 
         // Generate report
-        // scan.add(['-r']);
+        scan.add(['-r']);
 
-        // Verbose
-        // if (fetch.verbose) {
-        //     scan.add(['-V']);
-        // }
+        // Verbose Debugging
+        if (fetch.debug) {
+            scan.add(['-V']);
+        }
 
         scan.add([fetch.image]);
         console.log('Scanning: ', scan.args);

@@ -54,6 +54,14 @@
             "required": false,
             "visibleRule": "stateful == false",
             "helpMarkDown": "Path to a local policy bundle."
+        },
+        {
+            "name": "debug",
+            "type": "boolean",
+            "label": "Verbose logging output",
+            "defaultValue": false,
+            "required": false,
+            "helpMarkDown": "More verbose logging output from the scanner."
         }
     ],
     "execution": {
