@@ -23,47 +23,20 @@
             "helpMarkDown": "Container image to operate on <repo/image:tag>."
         },
         {
-            "name": "stateful",
-            "type": "boolean",
-            "label": "Send results to Anchore Enterprise",
-            "defaultValue": false,
-            "required": false,
-            "helpMarkDown": "Send the image manifest to a running instance of Anchore Enterprise."
-        },
-        {
-            "name": "url",
-            "type": "string",
-            "label": "Anchore Engine URL",
-            "defaultValue": "",
-            "required": false,
-            "visibleRule": "stateful == true",
-            "helpMarkDown": "URL for Anchore Engine instance."
-        },
-        {
-            "name": "username",
-            "type": "string",
-            "label": "Anchore Engine Username",
-            "defaultValue": "",
-            "required": false,
-            "visibleRule": "stateful == true",
-            "helpMarkDown": "Username for Anchore Engine instance."
-        },
-        {
-            "name": "password",
-            "type": "string",
-            "label": "Anchore Engine Password",
-            "defaultValue": "",
-            "required": false,
-            "visibleRule": "stateful == true",
-            "helpMarkDown": "Password for Anchore Engine instance."
-        },
-        {
             "name": "dockerfile",
             "type": "string",
             "label": "Path to Dockerfile",
             "defaultValue": "",
             "required": false,
             "helpMarkDown": "Path to Dockerfile for scanned image."
+        },
+        {
+            "name": "failBuild",
+            "type": "boolean",
+            "label": "Fail the build on policy evaulation",
+            "defaultValue": false,
+            "required": false,
+            "helpMarkDown": "Fail the build if policy evaluation returns a fail."
         },
         {
             "name": "remoteImage",
@@ -74,7 +47,7 @@
             "helpMarkDown": "Pull down a remote image to be scanned."
         },
         {
-            "name": "policyBundle",
+            "name": "customPolicyPath",
             "type": "string",
             "label": "Path to local policy bundle",
             "defaultValue": "",

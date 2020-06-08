@@ -29,65 +29,33 @@ async function run() {
         var scan: ScanArgs = new ScanArgs(scanner);
 
         // Build the command string based off inputs
-        if (fetch.stateful) { // Analyze command
-
-            scan.add(['analyze']);
-            scan.add(['-r', fetch.url]);
-            scan.add(['-u', fetch.username]);
-            scan.add(['-p', fetch.password]);
-
-            // scan.add(['-a', fetch.annotations]);
-            // scan.add(['-d', fetch.digest]);
-
-            if (fetch.dockerfile) {
-                scan.add(['-f', fetch.dockerfile]);
-            }
-
-            // scan.add(['-i', fetch.imageID]);
-            // scan.add(['-m', fetch.manifest]);
-            // scan.add(['-t', fetch.timeout]);
-
-            scan.add(['-g']); // Generate the manifest
-
-            if (fetch.remote) {
-                scan.add(['-P']);
-            }
-
-            // Verbose
-            // if (fetch.verbose) {
-            //     scan.add(['-V']);
-            // }
-
+        scan.add(['scan']);
+        if (fetch.policy) {
+            scan.add(['-b', fetch.policy]);
         }
-        else { // Scan command
 
-            scan.add(['scan']);
-            if (fetch.policy) {
-                scan.add(['-b', fetch.policy]);
-            }
+        if (fetch.dockerfile) {
+            scan.add(['-d', fetch.dockerfile]);
+        }
+        // scan.add(['-v', fetch.archives]);
+        // scan.add(['-t', fetch.timeout]);
 
-            if (fetch.dockerfile) {
-                scan.add(['-d', fetch.dockerfile]);
-            }
-            // scan.add(['-v', fetch.archives]);
-            // scan.add(['-t', fetch.timeout]);
-
-            // Exit on fail
+        // Exit on fail
+        if (fetch.failbuild) {
             scan.add(['-f']);
-
-            if (fetch.remote) {
-                scan.add(['-p']);
-            }
-
-            // Generate report
-            // scan.add(['-r']);
-
-            // Verbose
-            // if (fetch.verbose) {
-            //     scan.add(['-V']);
-            // }
-
         }
+
+        if (fetch.remote) {
+            scan.add(['-p']);
+        }
+
+        // Generate report
+        // scan.add(['-r']);
+
+        // Verbose
+        // if (fetch.verbose) {
+        //     scan.add(['-V']);
+        // }
 
         scan.add([fetch.image]);
         console.log('Scanning: ', scan.args);

@@ -10,24 +10,8 @@ export class InputFetch {
     //
     // Return each corresponding input.
     //
-    get url(): string  {
-        return this.fetchString('url', false);
-    }
-
-    get username(): string  {
-        return this.fetchString('username', false);
-    }
-
-    get password(): string  {
-        return this.fetchString('password', false);
-    }
-
     get image(): string  {
         return this.fetchString('image', true);
-    }
-
-    get stateful(): boolean {
-        return tl.getBoolInput('stateful');
     }
 
     get dockerfile(): string  {
@@ -40,6 +24,10 @@ export class InputFetch {
 
     get policy(): string  {
         return this.fetchPath('policyBundle', false, true);
+    }
+
+    get failbuild(): boolean {
+        return tl.getBoolInput('failBuild');
     }
 
     //
