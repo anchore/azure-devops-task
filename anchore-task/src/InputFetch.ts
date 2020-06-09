@@ -23,7 +23,7 @@ export class InputFetch {
     }
 
     get policy(): string  {
-        return this.fetchPath('policyBundle', false, true);
+        return this.fetchPath('customPolicyPath', false, true);
     }
 
     get failbuild(): boolean {

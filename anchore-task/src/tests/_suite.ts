@@ -5,13 +5,12 @@ import * as ttm from 'azure-pipelines-task-lib/mock-test';
 describe('Input tests', function () {
 
     before (function() {
-        process.env['INPUT_URL'] = '';
-        process.env['INPUT_USERNAME'] = '';
-        process.env['INPUT_PASSWORD'] = '';
-        process.env['INPUT_STATEFUL'] = '';
+        process.env['INPUT_IMAGE'] = '';
         process.env['INPUT_DOCKERFILE'] = '';
         process.env['INPUT_REMOTEIMAGE'] = '';
-        process.env['INPUT_IMAGE'] = '';
+        process.env['INPUT_FAILBUILD'] = '';
+        process.env['INPUT_CUSTOMPOLICYPATH'] = '';
+        process.env['INPUT_DEBUG'] = '';
 
     });
 

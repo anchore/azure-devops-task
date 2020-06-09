@@ -1,3 +1,5 @@
+import path = require('path');
+import fs = require('fs');
 import tl = require('azure-pipelines-task-lib/task');
 import tr = require('azure-pipelines-task-lib/toolrunner');
 
@@ -59,6 +61,24 @@ async function run() {
 
         scan.add([fetch.image]);
         console.log('Scanning: ', scan.args);
+
+        var reportPath = path.join( __dirname, '..', 'anchore-reports');
+        tl.checkPath(reportPath, "ReportPath");
+        console.log("Report Path: %s", reportPath);
+
+        // fs.readdirSync(reportPath).forEach(file => {
+        //     console.log(path.join(reportPath, file));
+        // });
+
+        var reports = fs.readdirSync(reportPath)
+
+        reports = reports.map(f => path.join(reportPath, f));
+
+        console.log(reports);
+
+        tl.setVariable('anchoreContentFiles',  reports[0]);
+        tl.setVariable('anchoreContentOS',     reports[1]);
+        tl.setVariable('anchorePolicyResults', reports[3]);
 
         var bash = tl.which('bash');
         var inlinescan: tr.ToolRunner = tl.tool(bash).line(scan.args);

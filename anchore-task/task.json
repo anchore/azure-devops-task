@@ -10,7 +10,7 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 39
+        "Patch": 40
     },
     "instanceNameFormat": "Anchore Container Scan",
     "inputs": [
@@ -52,7 +52,6 @@
             "label": "Path to local policy bundle",
             "defaultValue": "",
             "required": false,
-            "visibleRule": "stateful == false",
             "helpMarkDown": "Path to a local policy bundle."
         },
         {

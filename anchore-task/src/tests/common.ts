@@ -7,10 +7,12 @@ export let answers: any = {
         ['mock/docker']: true,
         ['mock/curl']: true,
         ['mock/bash']: true,
-        ['mock/Dockerfile']: true
+        ['mock/Dockerfile']: true,
+        ['mock/policy-bundle.json']: true
     },
     "exist": {
-        'mock/Dockerfile': true
+        'mock/Dockerfile': true,
+        'mock/policy-bundle.json': true
     },
     "which": {
         "docker": "mock/docker",
