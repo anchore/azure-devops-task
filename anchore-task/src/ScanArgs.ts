@@ -16,7 +16,7 @@ export class ScanArgs {
     // Concatenate a list of commands to the private _args
     add (args: string[]) {
 
-        var tmp: string = '';
+        let tmp: string = '';
 
         args.forEach(s => {
 

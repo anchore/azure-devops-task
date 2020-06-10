@@ -7,21 +7,24 @@ import { InputFetch } from './InputFetch';
 import { ScanArgs } from './ScanArgs';
 
 
+//
+// Main run function for task
+//
 function getInlineScan(): string {
 
     // Location of inline_scan script
     const scanner: string = `/tmp/inline_scan.sh`;
 
     // Ensure curl is available
-    var curlpath = tl.which('curl', true);
-    var curl: tr.ToolRunner = tl.tool(curlpath).arg([
+    let curlpath = tl.which('curl', true);
+    let curl: tr.ToolRunner = tl.tool(curlpath).arg([
         '--silent',
         '--fail',
         '--show-error',
         '--output', scanner,
         'https://ci-tools.anchore.io/inline_scan-v0.7.0'
     ]);
-    var out: tr.IExecSyncResult = curl.execSync();
+    let out: tr.IExecSyncResult = curl.execSync();
 
     // Handle errors
     if (out.code != 0) {
@@ -34,10 +37,13 @@ function getInlineScan(): string {
 }
 
 
+//
+// Main run function for task
+//
 function buildInlineScanCommand(scanner: string): string {
 
     const fetch: InputFetch = new InputFetch();
-    var scan: ScanArgs = new ScanArgs(scanner);
+    let scan: ScanArgs = new ScanArgs(scanner);
 
     // Build the command string based off inputs
     scan.add(['scan']);
@@ -75,11 +81,14 @@ function buildInlineScanCommand(scanner: string): string {
 }
 
 
+//
+// Main run function for task
+//
 function runInlineScan(scanargs: string) {
-    var bash = tl.which('bash');
-    var inlinescan: tr.ToolRunner = tl.tool(bash).line(scanargs);
+    let bash = tl.which('bash');
+    let inlinescan: tr.ToolRunner = tl.tool(bash).line(scanargs);
 
-    var out: tr.IExecSyncResult = inlinescan.execSync();
+    let out: tr.IExecSyncResult = inlinescan.execSync();
 
     // Handle errors
     if (out.code != 0) {
@@ -90,7 +99,96 @@ function runInlineScan(scanargs: string) {
 }
 
 
+//
 // Main run function for task
+//
+function genContentReport(dir: string): string {
+
+    let contents = []
+    let reports = fs.readdirSync(dir)
+    reports = reports.map(f => path.join(dir, f));
+
+    for (let i = 0; i < reports.length; i++) {
+        if (reports[i].indexOf('content-') != -1) {
+            console.log(reports[i]);
+            contents.push(JSON.parse(fs.readFileSync(reports[i]).toString()));
+        }
+    }
+
+    let bom = contents.reduce((merged, n) => merged.concat(n.content), []);
+    fs.writeFile(path.join(dir, 'contents.json'), JSON.stringify(bom), function(err) {
+        if (err) {
+            // TODO End task with errors
+            console.log(err);
+            throw new Error('Could not create contents.json');
+        }
+        else {
+            console.log('Created contents.json');
+        }
+    });
+
+    return path.join(dir, 'contents.json');
+}
+
+
+//
+// Main run function for task
+//
+function getPolicyStatus(dir: string): string {
+
+    let reports = fs.readdirSync(dir)
+    reports = reports.map(f => path.join(dir, f));
+
+    let index = -1
+
+    for (let i = 0; i < reports.length; i++) {
+        if (reports[i].indexOf('-policy') != -1) {
+            console.log(reports[i]);
+            index = i;
+        }
+    }
+    if (index < 0) {
+        throw new Error('Could not find policy report');
+    }
+    let policyEval = JSON.parse(fs.readFileSync(reports[index]).toString());
+    let imageId = Object.keys(policyEval[0]);
+    let imageTag = Object.keys(policyEval[0][imageId[0]]);
+    let policyStatus = policyEval[0][imageId[0]][imageTag[0]][0]['status'];
+
+    if (policyStatus) {
+        return policyStatus;
+    }
+    else {
+        throw new Error('Could not retrieve status of policy scan');
+    }
+
+}
+
+
+function getVulnPath(dir: string): string {
+
+    let reports = fs.readdirSync(dir)
+    reports = reports.map(f => path.join(dir, f));
+
+    let index = -1
+
+    for (let i = 0; i < reports.length; i++) {
+        if (reports[i].indexOf('-vuln') != -1) {
+            console.log(reports[i]);
+            index = i;
+        }
+    }
+    if (index < 0) {
+        throw new Error('Could not find vulnerability report');
+    }
+    tl.mv(reports[index], path.join(dir, 'vulnerabilities.json'), '-f');
+    return path.join(dir, 'vulnerabilities.json');
+}
+
+
+//
+// Main run function for task
+//
 async function run() {
     try {
 
@@ -104,32 +202,22 @@ async function run() {
 
 
 
-        var reportPath: string = path.join( __dirname, '..', 'anchore-reports');
-        tl.checkPath(reportPath, "ReportPath");
-        console.log("Report Path: %s", reportPath);
+        let reportsPath: string = path.join( __dirname, '..', 'anchore-reports');
+        tl.checkPath(reportsPath, 'ReportPath');
+        console.log('Report Path: %s', reportsPath);
 
-        getContent(reportPath);
+        let policyStatus: string = getPolicyStatus(reportsPath);
+        let billOfMaterialsPath: string = genContentReport(reportsPath);
+        let vulnerabilitiesPath: string = getVulnPath(reportsPath);
+
+        tl.setVariable('policyStatus', policyStatus);
+        tl.setVariable('billOfMaterials', billOfMaterialsPath);
+        tl.setVariable('vulnerabilities', vulnerabilitiesPath);
 
     }
     catch (err) {
         tl.setResult(tl.TaskResult.Failed, err.message);
     }
-}
-
-function getContent(dir: string) {
-
-    let contents = []
-    let reports = fs.readdirSync(dir)
-    reports = reports.map(f => path.join(dir, f));
-
-    for (var i = 0; i < reports.length; i++) {
-        if (reports[i].indexOf("content-") != -1) {
-            console.log(reports[i]);
-            contents.push(JSON.parse(fs.readFileSync(reports[i]).toString()));
-        }
-    }
-
-    return contents.reduce((merged, n) => merged.concat(n.content), []);
 }
 
 // Run the task

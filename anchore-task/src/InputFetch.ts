@@ -41,7 +41,7 @@ export class InputFetch {
         if (required) {
             tl.setResult(tl.TaskResult.Failed, input.toUpperCase().concat(' fetch failed.'));
         }
-        return "";
+        return '';
     }
 
 
