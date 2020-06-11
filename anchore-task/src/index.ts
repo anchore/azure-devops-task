@@ -118,7 +118,7 @@ function genContentReport(dir: string): string {
     let bom = contents.reduce((merged, n) => merged.concat(n.content), []);
     fs.writeFile(path.join(dir, 'contents.json'), JSON.stringify(bom), function(err) {
         if (err) {
-            // TODO End task with errors
+            // TODO End task with warnings
             console.log(err);
             throw new Error('Could not create contents.json');
         }
@@ -181,7 +181,7 @@ function getVulnPath(dir: string): string {
     if (index < 0) {
         throw new Error('Could not find vulnerability report');
     }
-    tl.mv(reports[index], path.join(dir, 'vulnerabilities.json'), '-f');
+    tl.cp(reports[index], path.join(dir, 'vulnerabilities.json'), '-f');
     return path.join(dir, 'vulnerabilities.json');
 }
 
@@ -200,9 +200,12 @@ async function run() {
         const scanargs: string = buildInlineScanCommand(scanner);
         runInlineScan(scanargs);
 
-
-
-        let reportsPath: string = path.join( __dirname, '..', 'anchore-reports');
+        // let reportsPath: string = path.join( __dirname, '..', 'anchore-reports');
+        let srcDir = tl.getVariable('BUILD_SOURCESDIRECTORY');
+        if (!srcDir) {
+            throw new Error('Could not get the report path');
+        }
+        let reportsPath: string = path.join(srcDir, 'anchore-reports');
         tl.checkPath(reportsPath, 'ReportPath');
         console.log('Report Path: %s', reportsPath);
 
