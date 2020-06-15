@@ -8,7 +8,7 @@ import { ScanArgs } from './ScanArgs';
 
 
 //
-// Main run function for task
+//  Download inline scan.
 //
 function getInlineScan(): string {
 
@@ -38,7 +38,7 @@ function getInlineScan(): string {
 
 
 //
-// Main run function for task
+//  Build up all the options for inline scan.
 //
 function buildInlineScanCommand(scanner: string): string {
 
@@ -82,9 +82,13 @@ function buildInlineScanCommand(scanner: string): string {
 
 
 //
-// Main run function for task
+//  Execute the inline scan script.
 //
 function runInlineScan(scanargs: string) {
+
+    // Ensure docker is available
+    tl.which('docker', true);
+
     let bash = tl.which('bash');
     let inlinescan: tr.ToolRunner = tl.tool(bash).line(scanargs);
 
@@ -100,7 +104,7 @@ function runInlineScan(scanargs: string) {
 
 
 //
-// Main run function for task
+//  Generate the content report and return the path.
 //
 function genContentReport(dir: string): string {
 
@@ -132,7 +136,7 @@ function genContentReport(dir: string): string {
 
 
 //
-// Main run function for task
+//  Get the status of the policy evaluation.
 //
 function getPolicyStatus(dir: string): string {
 
@@ -165,6 +169,9 @@ function getPolicyStatus(dir: string): string {
 }
 
 
+//
+//  Get the path to the the vulnerabilities report.
+//
 function getVulnPath(dir: string): string {
 
     let reports = fs.readdirSync(dir)
@@ -190,17 +197,14 @@ function getVulnPath(dir: string): string {
 // Main run function for task
 //
 async function run() {
+
     try {
-
-        // Ensure docker is available
-        tl.which('docker', true);
-
         // Location of inline_scan script
         const scanner: string = getInlineScan();
         const scanargs: string = buildInlineScanCommand(scanner);
         runInlineScan(scanargs);
 
-        // let reportsPath: string = path.join( __dirname, '..', 'anchore-reports');
+        // Get the proper path for anchore-reports
         let srcDir = tl.getVariable('BUILD_SOURCESDIRECTORY');
         if (!srcDir) {
             throw new Error('Could not get the report path');
@@ -209,10 +213,12 @@ async function run() {
         tl.checkPath(reportsPath, 'ReportPath');
         console.log('Report Path: %s', reportsPath);
 
+        // Get outputs
         let policyStatus: string = getPolicyStatus(reportsPath);
         let billOfMaterialsPath: string = genContentReport(reportsPath);
         let vulnerabilitiesPath: string = getVulnPath(reportsPath);
 
+        // Set outputs
         tl.setVariable('policyStatus', policyStatus);
         tl.setVariable('billOfMaterials', billOfMaterialsPath);
         tl.setVariable('vulnerabilities', vulnerabilitiesPath);

@@ -39,14 +39,6 @@
             "helpMarkDown": "Fail the build if policy evaluation returns a fail."
         },
         {
-            "name": "remoteImage",
-            "type": "boolean",
-            "label": "Scanned image is in a remote repo",
-            "defaultValue": false,
-            "required": false,
-            "helpMarkDown": "Pull down a remote image to be scanned."
-        },
-        {
             "name": "customPolicyPath",
             "type": "string",
             "label": "Path to local policy bundle",

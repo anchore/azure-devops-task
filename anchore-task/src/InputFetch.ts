@@ -18,10 +18,6 @@ export class InputFetch {
         return this.fetchPath('dockerfile', false, true);
     }
 
-    get remote(): boolean {
-        return tl.getBoolInput('remoteImage');
-    }
-
     get policy(): string  {
         return this.fetchPath('customPolicyPath', false, true);
     }
@@ -33,6 +29,14 @@ export class InputFetch {
     get debug(): boolean {
         return tl.getBoolInput('debug');
     }
+
+    // get includepackages(): boolean {
+    //     return tl.getBoolInput('includePackages');
+    // }
+    //
+    // get timeout(): boolean {
+    //     return tl.getBoolInput('timeout');
+    // }
 
     //
     // Error function for the 'fetch*' functions.
