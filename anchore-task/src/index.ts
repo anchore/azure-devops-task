@@ -60,11 +60,6 @@ function buildInlineScanCommand(scanner: string): string {
         scan.add(['-t', fetch.timeout]);
     }
 
-    // Exit on fail
-    if (fetch.failbuild) {
-        scan.add(['-f']);
-    }
-
     // Generate report
     scan.add(['-r']);
 
@@ -221,6 +216,12 @@ async function run() {
         tl.setVariable('policyStatus', policyStatus);
         tl.setVariable('billOfMaterials', billOfMaterialsPath);
         tl.setVariable('vulnerabilities', vulnerabilitiesPath);
+
+        // Check the status of the policy scan
+        const fetch: InputFetch = new InputFetch();
+        if (fetch.failbuild && policyStatus == 'fail') {
+            throw new Error("Anchore policy scan returned 'fail' result");
+        }
 
     }
     catch (err) {
