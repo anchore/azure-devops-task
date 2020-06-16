@@ -30,9 +30,9 @@ export class InputFetch {
         return tl.getBoolInput('debug');
     }
 
-    // get includepackages(): boolean {
-    //     return tl.getBoolInput('includePackages');
-    // }
+    get includepackages(): boolean {
+        return tl.getBoolInput('includeAppPackages');
+    }
 
     get timeout(): string {
         return this.fetchString('timeout', false);

@@ -61,6 +61,14 @@
             "defaultValue": "",
             "required": false,
             "helpMarkDown": "Set the scan timeout."
+        },
+        {
+            "name": "includeAppPackages",
+            "type": "boolean",
+            "label": "Include application packages for vulnerability matches",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Include application packages for vulnerability matches. Requires more vuln data and thus scan will be slower but better results."
         }
     ],
     "execution": {

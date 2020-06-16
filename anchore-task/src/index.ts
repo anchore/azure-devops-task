@@ -12,6 +12,21 @@ import { ScanArgs } from './ScanArgs';
 //
 function getInlineScan(): string {
 
+    const fetch: InputFetch = new InputFetch();
+    let script: string = '';
+    let version = 'v0.6.0';
+    if (version.indexOf('v') < 0) {
+         version = 'v'.concat(version);
+    }
+
+    if (!fetch.includepackages) {
+        process.env.ANCHORE_CI_IMAGE = 'docker.io/anchore/inline-scan-slim:'.concat(version);
+        console.log('ANCHORE_CI_IMAGE: ', process.env.ANCHORE_CI_IMAGE);
+    }
+    else {
+        delete process.env.ANCHORE_CI_IMAGE;
+    }
+
     // Location of inline_scan script
     const scanner: string = `/tmp/inline_scan.sh`;
 
@@ -22,7 +37,7 @@ function getInlineScan(): string {
         '--fail',
         '--show-error',
         '--output', scanner,
-        'https://ci-tools.anchore.io/inline_scan-v0.7.0'
+        'https://ci-tools.anchore.io/inline_scan-'.concat(version)
     ]);
     let out: tr.IExecSyncResult = curl.execSync();
 
