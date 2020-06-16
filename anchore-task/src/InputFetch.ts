@@ -33,10 +33,10 @@ export class InputFetch {
     // get includepackages(): boolean {
     //     return tl.getBoolInput('includePackages');
     // }
-    //
-    // get timeout(): boolean {
-    //     return tl.getBoolInput('timeout');
-    // }
+
+    get timeout(): string {
+        return this.fetchString('timeout', false);
+    }
 
     //
     // Error function for the 'fetch*' functions.

@@ -55,15 +55,14 @@ function buildInlineScanCommand(scanner: string): string {
         scan.add(['-d', fetch.dockerfile]);
     }
     // scan.add(['-v', fetch.archives]);
-    // scan.add(['-t', fetch.timeout]);
+
+    if (fetch.timeout) {
+        scan.add(['-t', fetch.timeout]);
+    }
 
     // Exit on fail
     if (fetch.failbuild) {
         scan.add(['-f']);
-    }
-
-    if (fetch.remote) {
-        scan.add(['-p']);
     }
 
     // Generate report
