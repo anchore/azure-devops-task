@@ -10,7 +10,7 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 54
+        "Patch": 55
     },
     "instanceNameFormat": "Anchore Container Scan",
     "inputs": [
@@ -69,6 +69,14 @@
             "defaultValue": "",
             "required": false,
             "helpMarkDown": "Include application packages for vulnerability matches. Requires more vuln data and thus scan will be slower but better results."
+        },
+        {
+            "name": "anchoreVersion",
+            "type": "string",
+            "label": "Specify version of anchore to use for scan.",
+            "defaultValue": "0.7.1",
+            "required": false,
+            "helpMarkDown": "An optional parameter to specify a specific version of anchore to use for the scan."
         }
     ],
     "execution": {

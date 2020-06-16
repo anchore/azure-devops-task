@@ -14,8 +14,8 @@ function getInlineScan(): string {
 
     const fetch: InputFetch = new InputFetch();
     let script: string = '';
-    let version = 'v0.6.0';
-    if (version.indexOf('v') < 0) {
+    let version = fetch.version;
+    if (version != 'latest' && version.indexOf('v') < 0) {
          version = 'v'.concat(version);
     }
 

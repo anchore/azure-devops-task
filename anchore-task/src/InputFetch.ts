@@ -38,6 +38,10 @@ export class InputFetch {
         return this.fetchString('timeout', false);
     }
 
+    get version(): string {
+        return this.fetchString('anchoreVersion', false);
+    }
+
     //
     // Error function for the 'fetch*' functions.
     //
