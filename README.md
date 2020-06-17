@@ -4,18 +4,23 @@ Anchore Task Extensions for Azure DevOps Pipelines
 
 ---
 
-This task uses the [Anchore Inline Scan][1] container to scan images in a Continuous Integration pipeline.
+This is an Azure DevOps Pipeline task for scanning images using
+[Anchore Engine][1]. It is used to scan container images and will return the
+vulnerabilities found, a software bill of materials, and the result of a policy
+evaluation. The task can be provided a custom policy which can be used to fail
+the pipeline if so desired.
+
+**No data is sent to a remote service to execute the scan , and no credentials are required**
 
 ## Task usage
 
-**Default behavior is a stateless local scan**
-
+#### Getting the results only
 ```
 Anchore@0
   image: imagename:tag
 ```
 
-### Scanning a local image - stateless
+### Scanning an image
 ```
 - task: Anchore@0
   inputs:
@@ -23,106 +28,29 @@ Anchore@0
     dockerfile: 'Dockerfile'
 ```
 
-### Scanning a local image - stateful
-```
-- task: Anchore@0
-  inputs:
-    image: 'imagename:tag'
-    stateful: true
-    url: 'myanchore.com:8228/v1'
-    username: 'fakeuser'
-    password: 'fakepass'
-    dockerfile: 'Dockerfile'
-```
+## Inputs Description
 
-### Scanning a remote image - stateless
-```
-- task: Anchore@0
-  inputs:
-    image: 'repo/imagename:tag'
-    dockerfile: 'Dockerfile'
-    remoteImage: true
-```
+| Input Name               | Description                                                                                                                      | Required           | Default Value |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------|--------------------|---------------|
+| image                    | The image to scan                                                                                                                | :heavy_check_mark: | N/A           |
+| dockerfile               | Path to the dockerfile used to build `image`. Adds metadata for the policy evaluation                                            |                    |               |
+| failBuild                | Fail the build if policy evaluation returns a fail.                                                                              |                    | false         |
+| customPolicyPath         | Path to a local policy bundle.                                                                                                   |                    |               |
+| debug                    | More verbose logging output from the scanner.                                                                                    |                    | false         |
+| timeout                  | Set the scan timeout.                                                                                                            |                    |               |
+| includeAppPackages       | Include application packages for vulnerability matches. Requires more vuln data and thus scan will be slower but better results. |                    | false         |
+| anchoreVersion           | An optional parameter to specify a specific version of anchore to use for the scan.                                              |                    | v0.7.1        |
+| printVulnerabilityReport | Print the vulnerability report to the screen.                                                                                    |                    | true          |
 
-### Scanning a remote image - stateful
-```
-- task: Anchore@0
-  inputs:
-    image: 'repo/imagename:tag'
-    stateful: true
-    url: 'myanchore.com:8228/v1'
-    username: 'fakeuser'
-    password: 'fakepass'
-    dockerfile: 'Dockerfile'
-    remoteImage: true
-```
+## Outputs Description
 
+| Output Name     | Description                                                      | Type   |
+|-----------------|------------------------------------------------------------------|--------|
+| billOfMaterials | Path to a json file with the list of packages found in the image | string |
+| vulnerabilities | Path to a json file with list of vulnerabilities found in image  | string |
+| policyCheck     | Policy evaluation status of the image, either 'pass' or 'fail'   | string |
 
-# Variable Description
-
-### image
-```
-Default:
-Required: yes
-```
-
-### dockerfile
-```
-Default:
-Required: no
-```
-
-### timeout (not implemented yet)
-```
-Default: 300
-Required: no
-```
-
-### verbose (not implemented yet)
-```
-Default: false
-Required: no
-```
-
-### remoteImage
-```
-Default: false
-Required: no
-```
-
-### stateful
-```
-Default: false
-Required: no
-```
-
-### url
-```
-Default:
-Required: stateful == true
-
-* Also need a port
-```
-
-### username
-```
-Default:
-Required: stateful == true
-```
-
-### password
-```
-Default:
-Required: stateful == true
-```
-
-### policyBundle (not implemented yet)
-```
-Default:
-Required: no
-```
-
-## Building Locally
+## Building Locally (Developer Notes)
 
 To build either extension locally just `cd` into the appropriate directory and run
 ```
