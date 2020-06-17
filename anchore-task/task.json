@@ -10,53 +10,81 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 5
+        "Patch": 58
     },
     "instanceNameFormat": "Anchore Container Scan",
     "inputs": [
-        {
-            "name": "url",
-            "type": "string",
-            "label": "Anchore Engine URL",
-            "defaultValue": "bad",
-            "required": true,
-            "helpMarkDown": "URL for Anchore Engine instance."
-        },
-        {
-            "name": "username",
-            "type": "string",
-            "label": "Anchore Engine Username",
-            "defaultValue": "",
-            "required": true,
-            "helpMarkDown": "Username for Anchore Engine instance."
-        },
-        {
-            "name": "password",
-            "type": "string",
-            "label": "Anchore Engine Password",
-            "defaultValue": "",
-            "required": true,
-            "helpMarkDown": "Password for Anchore Engine instance."
-        },
         {
             "name": "image",
             "type": "string",
             "label": "Container image",
             "defaultValue": "",
-            "required": false,
+            "required": true,
             "helpMarkDown": "Container image to operate on <repo/image:tag>."
         },
         {
-            "name": "command",
-            "type": "pickList",
-            "label": "API call that this task will make",
+            "name": "dockerfile",
+            "type": "string",
+            "label": "Path to Dockerfile",
             "defaultValue": "",
-            "required": true,
-            "options": {
-                "add": "add",
-                "get": "get"
-            },
-            "helpMarkDown": "Container image to operate on <repo/image:tag>."
+            "required": false,
+            "helpMarkDown": "Path to Dockerfile for scanned image."
+        },
+        {
+            "name": "failBuild",
+            "type": "boolean",
+            "label": "Fail the build on policy evaulation",
+            "defaultValue": false,
+            "required": false,
+            "helpMarkDown": "Fail the build if policy evaluation returns a fail."
+        },
+        {
+            "name": "customPolicyPath",
+            "type": "string",
+            "label": "Path to local policy bundle",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Path to a local policy bundle."
+        },
+        {
+            "name": "debug",
+            "type": "boolean",
+            "label": "Verbose logging output",
+            "defaultValue": false,
+            "required": false,
+            "helpMarkDown": "More verbose logging output from the scanner."
+        },
+        {
+            "name": "timeout",
+            "type": "string",
+            "label": "Set the scan timeout",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Set the scan timeout."
+        },
+        {
+            "name": "includeAppPackages",
+            "type": "boolean",
+            "label": "Include application packages for vulnerability matches",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Include application packages for vulnerability matches. Requires more vuln data and thus scan will be slower but better results."
+        },
+        {
+            "name": "anchoreVersion",
+            "type": "string",
+            "label": "Specify version of anchore to use for scan.",
+            "defaultValue": "0.7.1",
+            "required": false,
+            "helpMarkDown": "An optional parameter to specify a specific version of anchore to use for the scan."
+        },
+        {
+            "name": "printVulnerabilityReport",
+            "type": "boolean",
+            "label": "Print the vulnerability report to the screen",
+            "defaultValue": true,
+            "required": false,
+            "helpMarkDown": "Print all the vulnerability report to the screen."
         }
     ],
     "execution": {

@@ -1,84 +1,85 @@
-
 import tl = require('azure-pipelines-task-lib/task');
+
 
 export class InputFetch {
 
-    private _url      : string;
-    private _username : string;
-    private _password : string;
-    private _image    : string;
-    private _command  : string;
-
-    constructor() {
-        this._url      = this.fetch('url',      true);
-        this._username = this.fetch('username', true);
-        this._password = this.fetch('password', true);
-        this._image    = this.fetch('image',    false);
-
-        this._command  = this.fetchCommand();
-    }
-
+    constructor() { }
 
     //
     // Getters
     //
-    // Return all the inputs
+    // Return each corresponding input.
     //
-    get url()      : string { return this._url; }
-    get username() : string { return this._username; }
-    get password() : string { return this._password; }
-    get image()    : string { return this._image; }
-    get command()  : string { return this._command; }
+    get image(): string  {
+        return this.fetchString('image', true);
+    }
 
+    get dockerfile(): string  {
+        return this.fetchPath('dockerfile', false, true);
+    }
 
+    get policy(): string  {
+        return this.fetchPath('customPolicyPath', false, true);
+    }
 
-    //
-    // Error function for the 'fetch' function
-    //
-    private error(input: string, required: boolean): string {
-        if (required) {
-            throw new Error(input.toUpperCase().concat(' fetch failed.'));
-            return "(failed)";
-        }
-        else {
-            tl.setResult(tl.TaskResult.Skipped, input.toUpperCase().concat(' fetch failed.'));
-            return "(skipped)";
-        }
+    get failbuild(): boolean {
+        return tl.getBoolInput('failBuild');
+    }
+
+    get debug(): boolean {
+        return tl.getBoolInput('debug');
+    }
+
+    get includepackages(): boolean {
+        return tl.getBoolInput('includeAppPackages');
+    }
+
+    get timeout(): string {
+        return this.fetchString('timeout', false);
+    }
+
+    get version(): string {
+        return this.fetchString('anchoreVersion', false);
+    }
+
+    get printvulnreport(): boolean {
+        return tl.getBoolInput('printVulnerabilityReport');
     }
 
     //
-    // Fetch the inputs from the task
+    // Error function for the 'fetch*' functions.
     //
-    private fetch(input: string, required: boolean): string {
+    private error (input: string, required: boolean): string {
+        if (required) {
+            tl.setResult(tl.TaskResult.Failed, input.toUpperCase().concat(' fetch failed.'));
+        }
+        return '';
+    }
+
+
+    //
+    // Fetch a path input from the task.
+    //
+    private fetchPath (input: string, required: boolean, check: boolean): string {
+
+        const ti: string | undefined = tl.getPathInput(input, required, check);
+
+        if (ti === undefined || ti.length == 0) {
+            return this.error(input, required);
+        }
+        return ti;
+    }
+
+    //
+    // Fetch a string input from the task.
+    //
+    private fetchString (input: string, required: boolean): string {
 
         const ti: string | undefined = tl.getInput(input, required);
 
         if (ti === undefined || ti.length == 0) {
             return this.error(input, required);
         }
-
-        return ti;
-    }
-
-
-
-    //
-    // Fetch the command input and ensure it is valid
-    //
-    private fetchCommand(): string {
-
-        const ti: string = this.fetch('command', true);
-
-        const commands: Array<string> = [
-            'get',
-            'add'
-        ];
-
-        if (!commands.includes(ti)) {
-            throw new Error(ti.toUpperCase().concat(' command is invalid.'));
-            return "(invalid)";
-        }
-
         return ti;
     }
 

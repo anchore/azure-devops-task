@@ -1,0 +1,35 @@
+# Anchore DevOps Task Dev Pipeline
+---
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  - name: srcDirectory
+    value: '$(System.DefaultWorkingDirectory)/src'
+
+
+stages:
+- stage: Testing
+  displayName: Build and Test
+  jobs:
+  - job: Testing
+    displayName: Build and Test
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
+
+    - script: |
+        npm install
+        npm run build
+      workingDirectory: anchore-task
+      displayName: 'Anchore@0: Install and Build'
+
+    - script: |
+        npm run test
+      workingDirectory: anchore-task
+      displayName: 'Anchore@0: Test'

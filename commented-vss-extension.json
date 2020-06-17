@@ -1,0 +1,68 @@
+{
+    "manifestVersion": 1,
+    "id": "anchore-build-release-task",
+    "name": "Anchore Build and Release Tools",
+    "version": "0.0.29",
+    "publisher": "FoundItSoftware",
+//    "galleryFlags": [
+//        "Public"
+//    ],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "description": "Tools for building/releasing with Anchore Security Scanning.",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "images/extension-icon.png"
+    },
+    "branding": {
+        "color": "rgb(34, 34, 34)",
+        "theme": "dark"
+    },
+    "content": {
+        "details": {
+            "path": "README.md"
+        }
+//        "license": {
+//            "path": "eula.md"
+//        }
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/found-it/azure-devops-task"
+    },
+    "files": [
+        {
+            "path": "anchore-task"
+        },
+        {
+            "path": "anchore-enterprise-task"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "engine-custom-build-release-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "anchore-task"
+            }
+        },
+        {
+            "id": "enterprise-custom-build-release-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "anchore-enterprise-task"
+            }
+        }
+    ]
+}

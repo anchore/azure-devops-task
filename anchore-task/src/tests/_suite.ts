@@ -4,46 +4,66 @@ import * as ttm from 'azure-pipelines-task-lib/mock-test';
 
 describe('Input tests', function () {
 
-    before( function() {
+    before (function() {
+        process.env['INPUT_IMAGE'] = '';
+        process.env['INPUT_DOCKERFILE'] = '';
+        process.env['INPUT_REMOTEIMAGE'] = '';
+        process.env['INPUT_FAILBUILD'] = '';
+        process.env['INPUT_CUSTOMPOLICYPATH'] = '';
+        process.env['INPUT_DEBUG'] = '';
 
     });
 
-    after(() => {
+    after (() => {
 
     });
 
-    it('should succeed with simple inputs', function(done: MochaDone) {
+    it ('[SUCCEED] With only required inputs', function(done: MochaDone) {
         // Add success test here
-        this.timeout(1000);
+        this.timeout(2000);
 
-        let tp = path.join(__dirname, 'success.js');
+        let tp = path.join(__dirname, 'DefaultCaseSuccess.js');
         let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
 
         tr.run();
-        console.log(tr.succeeded);
+        console.log(tr.stdout);
         assert.equal(tr.succeeded, true, 'should have succeeded');
         assert.equal(tr.warningIssues.length, 0, "should have no warnings");
         assert.equal(tr.errorIssues.length, 0, "should have no errors");
-        console.log(tr.stdout);
-        assert.equal(tr.stdout.indexOf('URL www.anchore.com') >= 0, true, "should display URL www.anchore.com");
+        assert.equal(tr.stdout.indexOf('[command]mock/bash /tmp/inline_scan.sh scan testimage:latest') >= 0, true, "Command is correct");
+
+        assert.equal(tr.stdout.indexOf('image=testimage:latest') >= 0, true, "Input for image is correct");
+
         done();
     });
 
-    it('it should fail if tool returns 1', function(done: MochaDone) {
-        // Add failure test here
-        this.timeout(1000);
+    it ('[SUCCEED] With scan inputs', function(done: MochaDone) {
+        // Add success test here
+        this.timeout(2000);
 
-        let tp = path.join(__dirname, 'failure.js');
+        let tp = path.join(__dirname, 'ScanSuccess.js');
         let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
 
         tr.run();
-        console.log(tr.succeeded);
-        console.log(tr.stdout);
+        assert.equal(tr.succeeded, true, 'should have succeeded');
+        assert.equal(tr.warningIssues.length, 0, "should have no warnings");
+        assert.equal(tr.errorIssues.length, 0, "should have no errors");
+        assert.equal(tr.stdout.indexOf('[command]mock/bash /tmp/inline_scan.sh scan -d mock/Dockerfile testimage:latest') >= 0, true, "Command is correct");
+        done();
+    });
+
+    it ('[FAIL] With no inputs given', function(done: MochaDone) {
+        // Add failure test here
+        this.timeout(2000);
+
+        let tp = path.join(__dirname, 'NoInputFail.js');
+        let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
+
+        tr.run();
         assert.equal(tr.succeeded, false, 'should have failed');
         assert.equal(tr.warningIssues, 0, "should have no warnings");
         assert.equal(tr.errorIssues.length, 1, "should have 1 error issue");
-        assert.equal(tr.errorIssues[0], 'Input required: url', 'error issue output');
-        assert.equal(tr.stdout.indexOf('URL'), -1, "Should not display Hello bad");
+        assert.equal(tr.errorIssues[0], 'Input required: image', 'error issue output');
 
         done();
     });
