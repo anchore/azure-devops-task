@@ -42,6 +42,10 @@ export class InputFetch {
         return this.fetchString('anchoreVersion', false);
     }
 
+    get printvulnreport(): boolean {
+        return tl.getBoolInput('printVulnerabilityReport');
+    }
+
     //
     // Error function for the 'fetch*' functions.
     //

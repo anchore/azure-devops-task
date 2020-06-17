@@ -211,7 +211,7 @@ async function run() {
         // Location of inline_scan script
         const scanner: string = getInlineScan();
         const scanargs: string = buildInlineScanCommand(scanner);
-        // runInlineScan(scanargs);
+        runInlineScan(scanargs);
 
         // Get the proper path for anchore-reports
         let srcDir = tl.getVariable('BUILD_SOURCESDIRECTORY');
@@ -232,8 +232,7 @@ async function run() {
         tl.setVariable('billOfMaterials', billOfMaterialsPath);
         tl.setVariable('vulnerabilities', vulnerabilitiesPath);
 
-        let printVulns = true;
-        if (printVulns) {
+        if (fetch.printvulnreport) {
             console.log('\nAnchore Policy Result: %s\n', policyStatus);
             console.log('\nAnchore Vulnerability Report [ %s ]', fetch.image);
             console.log();

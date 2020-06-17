@@ -10,7 +10,7 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 56
+        "Patch": 58
     },
     "instanceNameFormat": "Anchore Container Scan",
     "inputs": [
@@ -77,6 +77,14 @@
             "defaultValue": "0.7.1",
             "required": false,
             "helpMarkDown": "An optional parameter to specify a specific version of anchore to use for the scan."
+        },
+        {
+            "name": "printVulnerabilityReport",
+            "type": "boolean",
+            "label": "Print the vulnerability report to the screen",
+            "defaultValue": true,
+            "required": false,
+            "helpMarkDown": "Print all the vulnerability report to the screen."
         }
     ],
     "execution": {
