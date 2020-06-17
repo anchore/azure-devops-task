@@ -5,6 +5,7 @@ import tr = require('azure-pipelines-task-lib/toolrunner');
 
 import { InputFetch } from './InputFetch';
 import { ScanArgs } from './ScanArgs';
+import { printVulnerabilityReport } from './PrintVulnReport';
 
 
 //
@@ -208,6 +209,8 @@ function getVulnPath(dir: string): string {
 async function run() {
 
     try {
+        const fetch: InputFetch = new InputFetch();
+
         // Location of inline_scan script
         const scanner: string = getInlineScan();
         const scanargs: string = buildInlineScanCommand(scanner);
@@ -232,8 +235,14 @@ async function run() {
         tl.setVariable('billOfMaterials', billOfMaterialsPath);
         tl.setVariable('vulnerabilities', vulnerabilitiesPath);
 
+        let printVulns = true;
+        if (printVulns) {
+            console.log('\nAnchore Vulnerability Report [ %s ]', fetch.image);
+            console.log();
+            printVulnerabilityReport(vulnerabilitiesPath);
+        }
+
         // Check the status of the policy scan
-        const fetch: InputFetch = new InputFetch();
         if (fetch.failbuild && policyStatus == 'fail') {
             throw new Error("Anchore policy scan returned 'fail' result");
         }
