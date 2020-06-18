@@ -185,6 +185,6 @@ Connect with the anchore community directly on [slack][6].
 [1]: https://docs.anchore.com/current/docs/engine/
 [2]: https://docs.microsoft.com/en-us/azure/devops/extend/develop/add-build-task?view=azure-devops
 [3]: https://github.com/anchore/azure-devops-task/issues
-[4]: https://github.com/anchore/azure-devops-task/CONTRIBUTING.rst
+[4]: https://github.com/anchore/azure-devops-task/blob/master/CONTRIBUTING.rst
 [5]: https://docs.anchore.com
 [6]: https://anchore.com/slack
