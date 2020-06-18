@@ -1,7 +1,8 @@
-
 import fs = require('fs');
 
-
+//
+//  Interfaces to import vulnerabilities.json into
+//
 interface AnchoreVulnResults {
     imageDigest: string;
     vulnerabilities: AnchoreCVE[];
@@ -53,7 +54,17 @@ function updateLen(max: number, current: string): number {
 }
 
 
-// Vulnerability ID  Package  Severity  Fix  CVE Refs  Vulnerability URL  Type  Feed Group  Package Path
+//
+//  Print the vulnerability report to the terminal with the following columns.
+//   * Vulnerability ID
+//   * Package
+//   * Severity
+//   * Fix
+//   * Vulnerability URL
+//   * Type
+//   * Feed Group
+//   * Package Path
+//
 export function printVulnerabilityReport(path: string) {
 
     // Read in the vulnerability results
@@ -120,6 +131,3 @@ export function printVulnerabilityReport(path: string) {
         process.stdout.write('\n');
     }
 }
-
-
-
