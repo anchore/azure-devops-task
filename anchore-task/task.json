@@ -10,7 +10,7 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 61
+        "Patch": 63
     },
     "instanceNameFormat": "Anchore Container Scan",
     "inputs": [

@@ -136,7 +136,7 @@ function genContentReport(dir: string): string {
             throw new Error('Could not create contents.json');
         }
         else {
-            console.log('Created contents.json');
+            console.log('Created Bill of Materials (contents.json)');
         }
     });
 
@@ -160,7 +160,7 @@ function getPolicyStatus(dir: string): string {
         }
     }
     if (index < 0) {
-        throw new Error('Could not find policy report');
+        return 'No policy report';
     }
     let policyEval = JSON.parse(fs.readFileSync(reports[index]).toString());
     let imageId = Object.keys(policyEval[0]);
@@ -171,7 +171,7 @@ function getPolicyStatus(dir: string): string {
         return policyStatus;
     }
     else {
-        throw new Error('Could not retrieve status of policy scan');
+        return 'Could not retrieve status of policy scan';
     }
 
 }
@@ -193,7 +193,7 @@ function getVulnPath(dir: string): string {
         }
     }
     if (index < 0) {
-        throw new Error('Could not find vulnerability report');
+        return 'No vulnerability report.';
     }
     tl.cp(reports[index], path.join(dir, 'vulnerabilities.json'), '-f');
     return path.join(dir, 'vulnerabilities.json');
@@ -232,7 +232,7 @@ async function run() {
         tl.setVariable('billOfMaterials', billOfMaterialsPath);
         tl.setVariable('vulnerabilities', vulnerabilitiesPath);
 
-        if (fetch.printvulnreport) {
+        if (fetch.printvulnreport && vulnerabilitiesPath != 'No vulnerability report.') {
             console.log('\nAnchore Policy Result: %s\n', policyStatus);
             console.log('\nAnchore Vulnerability Report [ %s ]', fetch.image);
             console.log();
