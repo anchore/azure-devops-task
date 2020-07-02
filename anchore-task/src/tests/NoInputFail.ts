@@ -10,6 +10,7 @@ let mock: mr.TaskMockRunner = new mr.TaskMockRunner(taskPath);
 
 // Don't set any inputs
 
+
 answers.exec[`mock/bash /tmp/inline_scan.sh scan`] = {
     "code": 1,
     "stdout": "Scan image",
