@@ -2,8 +2,8 @@
     "manifestVersion": 1,
     "id": "anchore-build-release-task",
     "name": "Anchore Build and Release Tools",
-    "version": "0.0.63",
-    "publisher": "FoundItSoftware",
+    "version": "0.0.65",
+    "publisher": "AnchoreInc",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
@@ -72,10 +72,10 @@
             ],
             "properties": {
                 "name": "anchore-task",
-                "iconAsset": "FoundItSoftware.anchore-build-release-task/images/anchore.png",
+                "iconAsset": "AnchoreInc.anchore-build-release-task/images/anchore.png",
                 "includesData": {
                     "assets": [
-                        "FoundItSoftware.anchore-build-release-task/images/anchore.png"
+                        "AnchoreInc.anchore-build-release-task/images/anchore.png"
                     ]
                 }
             }
