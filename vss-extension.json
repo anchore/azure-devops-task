@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
-    "id": "anchore-build-release-task",
-    "name": "Anchore Build and Release Tools",
+    "id": "anchore-scan-task",
+    "name": "Anchore Container Scan Task",
     "version": "0.0.65",
     "publisher": "Anchore",
     "targets": [
@@ -9,7 +9,7 @@
             "id": "Microsoft.VisualStudio.Services"
         }
     ],
-    "description": "Tools for building/releasing with Anchore Security Scanning.",
+    "description": "Scan docker containers with Anchore for vulnerabilities and policy violations.",
     "categories": [
         "Azure Pipelines"
     ],
