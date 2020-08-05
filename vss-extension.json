@@ -72,10 +72,10 @@
             ],
             "properties": {
                 "name": "anchore-scan-task",
-                "iconAsset": "AnchoreInc.anchore-build-release-task/images/anchore.png",
+                "iconAsset": "AnchoreInc.anchore-scan-task/images/anchore.png",
                 "includesData": {
                     "assets": [
-                        "AnchoreInc.anchore-build-release-task/images/anchore.png"
+                        "AnchoreInc.anchore-scan-task/images/anchore.png"
                     ]
                 }
             }
