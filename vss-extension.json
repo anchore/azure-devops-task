@@ -3,7 +3,7 @@
     "id": "anchore-build-release-task",
     "name": "Anchore Build and Release Tools",
     "version": "0.0.65",
-    "publisher": "AnchoreInc",
+    "publisher": "Anchore",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
@@ -44,15 +44,15 @@
             "uri": "https://www.anchore.com/support"
         },
         "repository": {
-            "uri": "https://github.com/found-it/azure-devops-task"
+            "uri": "https://github.com/anchore/azure-devops-task"
         },
         "issues": {
-            "uri": "https://github.com/found-it/azure-devops-task/issues"
+            "uri": "https://github.com/anchore/azure-devops-task/issues"
         }
     },
     "repository": {
         "type": "git",
-        "uri": "https://github.com/found-it/azure-devops-task"
+        "uri": "https://github.com/anchore/azure-devops-task"
     },
     "files": [
         {
