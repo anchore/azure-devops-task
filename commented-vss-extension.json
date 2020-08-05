@@ -1,6 +1,6 @@
 {
     "manifestVersion": 1,
-    "id": "anchore-build-release-task",
+    "id": "anchore-scan-task",
     "name": "Anchore Container Scan Task",
     "version": "0.0.1",
     "publisher": "AnchoreInc",
