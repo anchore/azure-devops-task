@@ -3,7 +3,7 @@
     "id": "anchore-scan-task",
     "name": "Anchore Container Scan Task",
     "version": "0.0.1",
-    "publisher": "Anchore",
+    "publisher": "AnchoreInc",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
@@ -65,13 +65,13 @@
     ],
     "contributions": [
         {
-            "id": "engine-custom-build-release-task",
+            "id": "anchore-scan-task",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "anchore-task",
+                "name": "anchore-scan-task",
                 "iconAsset": "AnchoreInc.anchore-build-release-task/images/anchore.png",
                 "includesData": {
                     "assets": [

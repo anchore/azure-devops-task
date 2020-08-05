@@ -3,7 +3,7 @@
     "id": "anchore-build-release-task",
     "name": "Anchore Container Scan Task",
     "version": "0.0.1",
-    "publisher": "Anchore",
+    "publisher": "AnchoreInc",
 //    "galleryFlags": [
 //        "Public"
 //    ],
@@ -38,30 +38,17 @@
     "files": [
         {
             "path": "anchore-task"
-        },
-        {
-            "path": "anchore-enterprise-task"
         }
     ],
     "contributions": [
         {
-            "id": "engine-custom-build-release-task",
+            "id": "anchore-scan-task",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
                 "name": "anchore-task"
-            }
-        },
-        {
-            "id": "enterprise-custom-build-release-task",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [
-                "ms.vss-distributed-task.tasks"
-            ],
-            "properties": {
-                "name": "anchore-enterprise-task"
             }
         }
     ]
