@@ -74,7 +74,7 @@
             "name": "anchoreVersion",
             "type": "string",
             "label": "Specify version of anchore to use for scan.",
-            "defaultValue": "0.7.2",
+            "defaultValue": "0.7.3",
             "required": false,
             "helpMarkDown": "An optional parameter to specify a specific version of anchore to use for the scan."
         },

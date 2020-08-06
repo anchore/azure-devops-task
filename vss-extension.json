@@ -1,15 +1,15 @@
 {
     "manifestVersion": 1,
-    "id": "anchore-build-release-task",
-    "name": "Anchore Build and Release Tools",
-    "version": "0.0.65",
+    "id": "anchore-scan-task",
+    "name": "Anchore Container Scan Task",
+    "version": "0.0.1",
     "publisher": "AnchoreInc",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
         }
     ],
-    "description": "Tools for building/releasing with Anchore Security Scanning.",
+    "description": "Scan docker containers with Anchore for vulnerabilities and policy violations.",
     "categories": [
         "Azure Pipelines"
     ],
@@ -44,15 +44,15 @@
             "uri": "https://www.anchore.com/support"
         },
         "repository": {
-            "uri": "https://github.com/found-it/azure-devops-task"
+            "uri": "https://github.com/anchore/azure-devops-task"
         },
         "issues": {
-            "uri": "https://github.com/found-it/azure-devops-task/issues"
+            "uri": "https://github.com/anchore/azure-devops-task/issues"
         }
     },
     "repository": {
         "type": "git",
-        "uri": "https://github.com/found-it/azure-devops-task"
+        "uri": "https://github.com/anchore/azure-devops-task"
     },
     "files": [
         {
@@ -65,17 +65,17 @@
     ],
     "contributions": [
         {
-            "id": "engine-custom-build-release-task",
+            "id": "anchore-scan-task",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "anchore-task",
-                "iconAsset": "AnchoreInc.anchore-build-release-task/images/anchore.png",
+                "name": "anchore-scan-task",
+                "iconAsset": "AnchoreInc.anchore-scan-task/images/anchore.png",
                 "includesData": {
                     "assets": [
-                        "AnchoreInc.anchore-build-release-task/images/anchore.png"
+                        "AnchoreInc.anchore-scan-task/images/anchore.png"
                     ]
                 }
             }

@@ -1,9 +1,9 @@
 {
     "manifestVersion": 1,
-    "id": "anchore-build-release-task",
-    "name": "Anchore Build and Release Tools",
-    "version": "0.0.29",
-    "publisher": "FoundItSoftware",
+    "id": "anchore-scan-task",
+    "name": "Anchore Container Scan Task",
+    "version": "0.0.1",
+    "publisher": "AnchoreInc",
 //    "galleryFlags": [
 //        "Public"
 //    ],
@@ -12,7 +12,7 @@
             "id": "Microsoft.VisualStudio.Services"
         }
     ],
-    "description": "Tools for building/releasing with Anchore Security Scanning.",
+    "description": "Scan docker containers with Anchore for vulnerabilities and policy violations.",
     "categories": [
         "Azure Pipelines"
     ],
@@ -33,35 +33,22 @@
     },
     "repository": {
         "type": "git",
-        "uri": "https://github.com/found-it/azure-devops-task"
+        "uri": "https://github.com/anchore/azure-devops-task"
     },
     "files": [
         {
             "path": "anchore-task"
-        },
-        {
-            "path": "anchore-enterprise-task"
         }
     ],
     "contributions": [
         {
-            "id": "engine-custom-build-release-task",
+            "id": "anchore-scan-task",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
                 "name": "anchore-task"
-            }
-        },
-        {
-            "id": "enterprise-custom-build-release-task",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [
-                "ms.vss-distributed-task.tasks"
-            ],
-            "properties": {
-                "name": "anchore-enterprise-task"
             }
         }
     ]
