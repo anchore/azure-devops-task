@@ -4,6 +4,7 @@
     "name": "Anchore Container Scan Task",
     "version": "0.0.1",
     "publisher": "AnchoreInc",
+    "public": true,
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
