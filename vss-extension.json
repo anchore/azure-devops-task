@@ -56,7 +56,7 @@
     },
     "files": [
         {
-            "path": "anchore-task"
+            "path": "anchore-scan-task"
         },
         {
             "path": "images/anchore.png",
