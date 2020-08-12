@@ -12,7 +12,7 @@ describe('Input tests', function () {
         process.env['INPUT_INCLUDEAPPPACKAGES'] = '';
 
         // Setting up the default behavior (as seen in Azure DevOps)
-        process.env['INPUT_ANCHOREVERSION'] = '0.7.1';
+        process.env['INPUT_ANCHOREVERSION'] = '0.8.0';
         process.env['INPUT_FAILBUILD'] = 'false';
         process.env['INPUT_DEBUG'] = 'false';
         process.env['INPUT_PRINTVULNERABILITYREPORT'] = 'true';

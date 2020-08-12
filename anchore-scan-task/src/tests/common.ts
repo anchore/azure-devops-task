@@ -22,7 +22,7 @@ export let answers: any = {
         'bash': 'mock/bash'
     },
     'exec': {
-        'mock/curl --silent --fail --show-error --output /tmp/inline_scan.sh https://ci-tools.anchore.io/inline_scan-v0.7.1': {
+        'mock/curl --silent --fail --show-error --output /tmp/inline_scan.sh https://ci-tools.anchore.io/inline_scan-v0.8.0': {
             'code': 0,
             'stdout': 'Download the inline scan script',
             'stderr': ''
