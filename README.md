@@ -118,7 +118,7 @@ Example yaml:
 | debug | More verbose logging output from the scanner. | | false |
 | timeout | Set the scan timeout. | | |
 | includeAppPackages | Include application packages for vulnerability matches. Requires more vuln data and thus scan will be slower but better results. | | false |
-| anchoreVersion | An optional parameter to specify a specific version of anchore to use for the scan. | | v0.8.0 |
+| anchoreVersion | An optional parameter to specify a specific version of anchore to use for the scan. | | v0.8.1 |
 | printVulnerabilityReport | Print the vulnerability report to the screen. | | true |
 
 
