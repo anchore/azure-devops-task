@@ -1,5 +1,9 @@
 # Anchore Azure DevOps Task Plugins
 
+_**Warning**: Anchore Inline Scan, which is utilized for this integration, is deprecated. Please update your integrations to use [Grype](https://github.com/anchore/grype) for CI-based vulnerability scanning or [Syft](https://github.com/anchore/syft)._
+
+_**After Jan 10, 2022**: users should be transitioned to [Grype](https://github.com/anchore/grype) or Grype-based integrations._ 
+
 Anchore Task Extensions for Azure DevOps Pipelines
 
 ---
